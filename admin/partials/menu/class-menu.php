@@ -67,11 +67,11 @@ if ( ! class_exists( 'MenuSetup' ) ) {
 
 			add_submenu_page(
 				'slate_wpap',
-				'Audio',
-				'Audio',
+				'Audios',
+				'Audios',
 				'manage_options',
-				'audio',
-				array( $this->functional, 'slate_wpap_sub_menu_page_____' ),
+				'audios',
+				array( $this->functional, 'slate_wpap_sub_menu_page_audio' ),
 			);
 
 			add_submenu_page(

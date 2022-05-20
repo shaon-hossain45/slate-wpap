@@ -17,7 +17,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 /**
  * Extend WP_List_Table
  */
-class Custom_List_Table extends WP_List_Table {
+class Custom_List_Table_Template extends WP_List_Table {
 
 	/**
 	 * [REQUIRED] You must declare constructor and give some basic params
@@ -27,8 +27,8 @@ class Custom_List_Table extends WP_List_Table {
 
 		parent::__construct(
 			array(
-				'singular' => 'newsletter',
-				'plural'   => 'newsletters',
+				'singular' => 'wpaptemplate',
+				'plural'   => 'wpaptemplates',
 			)
 		);
 	}
@@ -66,13 +66,13 @@ class Custom_List_Table extends WP_List_Table {
 	function column_template_name( $item ) {
 		// Build delete row action.
 		$delete_query_args = array(
-			'page'   => 'newsletters',
+			'page'   => 'wpaptemplates',
 			'action' => 'delete',
 			'id'     => $item['ID'],
 		);
 		$actions           = array(
-			'edit'   => sprintf( '<a href="?page=newsletters&action=edit&id=%s">%s</a>', $item['ID'], __( 'Edit', 'cltd_example' ) ),
-			'delete' => sprintf( '<a href="%1$s">%2$s</a>', esc_url( wp_nonce_url( add_query_arg( $delete_query_args, 'admin.php' ), 'deletenewsletter' ) ), _x( 'Delete', 'List table row action', 'wp-list-table-example' ) ),
+			'edit'   => sprintf( '<a href="?page=wpaptemplates&action=edit&id=%s">%s</a>', $item['ID'], __( 'Edit', 'cltd_example' ) ),
+			'delete' => sprintf( '<a href="%1$s">%2$s</a>', esc_url( wp_nonce_url( add_query_arg( $delete_query_args, 'admin.php' ), 'deletewpaptemplate' ) ), _x( 'Delete', 'List table row action', 'wp-list-table-example' ) ),
 		);
 
 		return sprintf(
@@ -132,14 +132,14 @@ class Custom_List_Table extends WP_List_Table {
 	 * @return [type] [description]
 	 */
 	public function no_items() {
-		_e( 'No newsletter items found.' );
+		_e( 'No wpaptemplate items found.' );
 	}
 	/**
 	 * iTechPublic delete activity
 	 */
 	public static function itechpublic_delete_activity( $data ) {
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'newsletters';
+		$table_name = $wpdb->prefix . 'wpaptemplates';
 		$results    = $wpdb->delete( $table_name, array( 'ID' => $data ), array( '%d' ) );
 	}
 
@@ -151,7 +151,7 @@ class Custom_List_Table extends WP_List_Table {
 	 */
 	protected function itechpublic_get_filter_count( $data = '' ) {
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'newsletters';
+		$table_name = $wpdb->prefix . 'wpaptemplates';
 
 		if ( $data == 1 ) {
 			$results = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE verified = %d", 1 ) );
@@ -218,13 +218,13 @@ class Custom_List_Table extends WP_List_Table {
 			// In our file that handles the request, verify the nonce.
 			$nonce = esc_attr( $_REQUEST['_wpnonce'] );
 
-			if ( ! wp_verify_nonce( $nonce, 'deletenewsletter' ) ) {
+			if ( ! wp_verify_nonce( $nonce, 'deletewpaptemplate' ) ) {
 				die( 'Go get a life script kiddies' );
 			} else {
 				self::itechpublic_delete_activity( absint( $_REQUEST['id'] ) );
 
-				add_flash_notice( __( '1 newsletter item permanently deleted.' ), 'success', true );
-				$redirect_to = admin_url( 'admin.php?page=newsletters&deleted=true' );
+				add_flash_notice( __( '1 wpaptemplate item permanently deleted.' ), 'success', true );
+				$redirect_to = admin_url( 'admin.php?page=wpaptemplates&deleted=true' );
 				wp_redirect( $redirect_to );
 				exit;
 			}
@@ -241,17 +241,17 @@ class Custom_List_Table extends WP_List_Table {
 				// Array required for count
 				$counter = count( $_REQUEST['id'] );
 				if ( $counter > 1 ) {
-					$counter = $counter . ' newsletter items';
+					$counter = $counter . ' wpaptemplate items';
 				} else {
-					$counter = $counter . ' newsletter item';
+					$counter = $counter . ' wpaptemplate item';
 				}
 				add_flash_notice( __( $counter . ' permanently deleted.' ), 'success', true );
-				$redirect_to = admin_url( 'admin.php?page=newsletters&deleted=true' );
+				$redirect_to = admin_url( 'admin.php?page=wpaptemplates&deleted=true' );
 				wp_redirect( $redirect_to );
 				exit;
 			} else {
 				add_flash_notice( __( 'Something wrong.' ), 'error', true );
-				$redirect_to = admin_url( 'admin.php?page=newsletters&deleted=false' );
+				$redirect_to = admin_url( 'admin.php?page=wpaptemplates&deleted=false' );
 				wp_redirect( $redirect_to );
 				exit;
 			}
@@ -275,7 +275,7 @@ class Custom_List_Table extends WP_List_Table {
 	 */
 	public function itechpublic_sub_wp_mail( $data ) {
 		global $wpdb;
-		$table_name       = $wpdb->prefix . 'newsletters';
+		$table_name       = $wpdb->prefix . 'wpaptemplates';
 		$template_email = $wpdb->get_var( $wpdb->prepare( "SELECT template_email FROM $table_name WHERE ID = %d", $data ) );
 		$site_name        = get_bloginfo( 'name' );
 		$options          = get_option( 'email_template_store' );
@@ -288,7 +288,7 @@ class Custom_List_Table extends WP_List_Table {
 
 		if ( ! is_wp_error( $wp_mail ) ) {
 			add_flash_notice( __( 'Email sent successfull.' ), 'success', true );
-			$redirect_to = admin_url( 'admin.php?page=newsletters' );
+			$redirect_to = admin_url( 'admin.php?page=wpaptemplates' );
 				wp_redirect( $redirect_to );
 				exit;
 		}
@@ -301,7 +301,7 @@ class Custom_List_Table extends WP_List_Table {
 	 */
 	function prepare_items() {
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'newsletters'; // do not forget about tables prefix
+		$table_name = $wpdb->prefix . 'wpaptemplates'; // do not forget about tables prefix
 
 		$per_page = 10; // constant, how much records will be shown per page
 
