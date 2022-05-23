@@ -117,6 +117,33 @@ class Slate_Wpap_Admin {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/slate-wpap-admin.js', array( 'jquery' ), $this->version, false );
 
+		wp_enqueue_script( 'inewsletter-template', plugin_dir_url( __FILE__ ) . 'js/slate-wpap-template-update.js', array( 'jquery' ), $this->version, false );
+		$ajax_nonce = wp_create_nonce( 'ntter_template' );
+
+				wp_localize_script(
+					'inewsletter-template',
+					'plugin_obj',
+					array(
+						'ajax_url' => admin_url( 'admin-post.php' ),
+						'action'   => 'template_update_setting',
+						'security' => $ajax_nonce,
+					)
+				);
+
+
+		wp_enqueue_script( 'inewsletter-audio', plugin_dir_url( __FILE__ ) . 'js/slate-wpap-audio-update.js', array( 'jquery' ), $this->version, false );
+		$ajax_nonce = wp_create_nonce( 'ntter_audio' );
+
+				wp_localize_script(
+					'inewsletter-audio',
+					'plugin_obj',
+					array(
+						'ajax_url' => admin_url( 'admin-post.php' ),
+						'action'   => 'audio_update_setting',
+						'security' => $ajax_nonce,
+					)
+				);
+
 	}
 
 }

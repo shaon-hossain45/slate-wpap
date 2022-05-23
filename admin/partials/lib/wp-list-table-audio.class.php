@@ -107,7 +107,7 @@ class Custom_List_Table_Audio extends WP_List_Table {
 			'cb'               => '<input type="checkbox" />', // Render a checkbox instead of text
 			'audio_name'  => __( 'Audio Name', 'cltd_example' ),
 			'audio_description' => __( 'Audio Description', 'cltd_example' ),
-			'audio_processed_or_unprocessed' => __( 'Audio Processed or Unprocessed', 'cltd_example' ),
+			'audio_processed_or_unprocessed' => __( 'Processed / Unprocessed', 'cltd_example' ),
 		);
 		return $columns;
 	}

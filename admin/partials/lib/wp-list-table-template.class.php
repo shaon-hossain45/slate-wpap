@@ -175,12 +175,12 @@ class Custom_List_Table_Template extends WP_List_Table {
 		$all_url      = remove_query_arg( array( 'filter', 's', 'paged', 'alert', 'user' ) );
 		$views['all'] = "<a href='{$all_url }' {$class} >" . __( 'All', 'cltd_example' ) . ' <span class="count">(' . number_format( $this->itechpublic_get_filter_count() ) . ')</span></a>';
 		$views_item   = array(
-			'verified' => array(
-				'name'      => __( 'Verified', 'cltd_example' ),
+			'template_title' => array(
+				'name'      => __( 'Template Title', 'cltd_example' ),
 				'status_id' => 1,
 			),
-			'register' => array(
-				'name'      => __( 'Register', 'cltd_example' ),
+			'template_description' => array(
+				'name'      => __( 'Template Description', 'cltd_example' ),
 				'status_id' => 2,
 			),
 		);
@@ -273,26 +273,26 @@ class Custom_List_Table_Template extends WP_List_Table {
 	 * @param  [type] $data [description]
 	 * @return [type]       [description]
 	 */
-	public function itechpublic_sub_wp_mail( $data ) {
-		global $wpdb;
-		$table_name       = $wpdb->prefix . 'wpaptemplates';
-		$template_email = $wpdb->get_var( $wpdb->prepare( "SELECT template_email FROM $table_name WHERE ID = %d", $data ) );
-		$site_name        = get_bloginfo( 'name' );
-		$options          = get_option( 'email_template_store' );
-		$htmltitle        = $options['email_template_title'];
-		$htmlcontent      = $options['email_template_content'];
+	// public function itechpublic_sub_wp_mail( $data ) {
+	// 	global $wpdb;
+	// 	$table_name       = $wpdb->prefix . 'wpaptemplates';
+	// 	$template_email = $wpdb->get_var( $wpdb->prepare( "SELECT template_email FROM $table_name WHERE ID = %d", $data ) );
+	// 	$site_name        = get_bloginfo( 'name' );
+	// 	$options          = get_option( 'email_template_store' );
+	// 	$htmltitle        = $options['email_template_title'];
+	// 	$htmlcontent      = $options['email_template_content'];
 
-		$subject = sprintf( __( '[%1$s] %2$s' ), $site_name, $htmltitle );
-		$headers = array( 'Content-Type: text/html; charset=UTF-8', 'From: iTechPublic <https://itechpublic.com>' );
-		$wp_mail = wp_mail( $template_email, $subject, $htmlcontent, $headers );
+	// 	$subject = sprintf( __( '[%1$s] %2$s' ), $site_name, $htmltitle );
+	// 	$headers = array( 'Content-Type: text/html; charset=UTF-8', 'From: iTechPublic <https://itechpublic.com>' );
+	// 	$wp_mail = wp_mail( $template_email, $subject, $htmlcontent, $headers );
 
-		if ( ! is_wp_error( $wp_mail ) ) {
-			add_flash_notice( __( 'Email sent successfull.' ), 'success', true );
-			$redirect_to = admin_url( 'admin.php?page=wpaptemplates' );
-				wp_redirect( $redirect_to );
-				exit;
-		}
-	}
+	// 	if ( ! is_wp_error( $wp_mail ) ) {
+	// 		add_flash_notice( __( 'Email sent successfull.' ), 'success', true );
+	// 		$redirect_to = admin_url( 'admin.php?page=wpaptemplates' );
+	// 			wp_redirect( $redirect_to );
+	// 			exit;
+	// 	}
+	// }
 
 	/**
 	 * [REQUIRED] This is the most important method
@@ -328,10 +328,10 @@ class Custom_List_Table_Template extends WP_List_Table {
 
 		// [REQUIRED] define $items array
 		// notice that last argument is ARRAY_A, so we will retrieve array
-		if ( isset( $_GET['filter'] ) && ( $_GET['filter'] == 'verified' ) ) {
+		if ( isset( $_GET['filter'] ) && ( $_GET['filter'] == 'template_title' ) ) {
 			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE verified= %d ORDER BY $orderby $order LIMIT %d OFFSET %d", 1, $per_page, $paged ), ARRAY_A );
 			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE verified = %d", 1 ) );
-		} elseif ( isset( $_GET['filter'] ) && ( $_GET['filter'] == 'register' ) ) {
+		} elseif ( isset( $_GET['filter'] ) && ( $_GET['filter'] == 'template_description' ) ) {
 			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE register= %d ORDER BY $orderby $order LIMIT %d OFFSET %d", 1, $per_page, $paged ), ARRAY_A );
 			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE register = %d", 1 ) );
 		} else {
@@ -340,8 +340,8 @@ class Custom_List_Table_Template extends WP_List_Table {
 		}
 
 		if ( $user_search_key ) {
-			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE template_name LIKE %s OR template_email LIKE %s", $wpdb->esc_like( $user_search_key ), $wpdb->esc_like( $user_search_key ) ), ARRAY_A );
-			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE template_name LIKE %s OR template_email LIKE %s", $wpdb->esc_like( $user_search_key ), $wpdb->esc_like( $user_search_key ) ) );
+			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE template_title LIKE %s OR template_email LIKE %s", $wpdb->esc_like( $user_search_key ), $wpdb->esc_like( $user_search_key ) ), ARRAY_A );
+			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE template_title LIKE %s OR template_email LIKE %s", $wpdb->esc_like( $user_search_key ), $wpdb->esc_like( $user_search_key ) ) );
 		}
 
 		// [REQUIRED] configure pagination

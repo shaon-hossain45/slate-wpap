@@ -47,11 +47,6 @@ class Custom_wpap_Admin_Display {
 			$menuPageObj = new MenuSetup( $menuBaseObj );
 		}
 
-        // Templates setup
-		// if ( class_exists( 'SwpapTemplates' ) ) {
-		// 	$SwpapTemplatesSetup = new SwpapTemplates();
-		// }
-
 		$this->dispatch_actions( $menuPageObj );
 
 	}
@@ -79,7 +74,7 @@ class Custom_wpap_Admin_Display {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'partials/menu/class-menu-base.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'partials/menu/class-menu.php';
-        //require_once plugin_dir_path( dirname( __FILE__ ) ) . 'partials/lib/templates.class.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'partials/admin-notice.class.php';
 	}
 
 	/**
@@ -93,5 +88,6 @@ class Custom_wpap_Admin_Display {
 		add_action( 'admin_menu', array( $data, 'wpdocs_register_my_custom_menu_page' ) );
 		// Register sub menu page.
 		add_action( 'admin_menu', array( $data, 'wpdocs_register_my_custom_submenu_page' ) );
+
 	}
 }

@@ -16,12 +16,29 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/wp-list-table-audio.c
 
 if ( ! class_exists( 'MenuBaseSetup' ) ) {
 	class MenuBaseSetup {
+
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since    1.0.0
+	 * @param      string $plugin_name       The name of this plugin.
+	 * @param      string $version    The version of this plugin.
+	 */
+		public function __construct( ) {
+
+			add_action( 'admin_post_template_update_setting', array( $this, 'template_update_setting' ) );
+			add_action( 'admin_post_nopriv_template_update_setting', array( $this, 'template_update_setting' ) );
+
+
+			add_action( 'admin_post_audio_update_setting', array( $this, 'audio_update_setting' ) );
+			add_action( 'admin_post_nopriv_audio_update_setting', array( $this, 'audio_update_setting' ) );
+		}
+
 		/**
 		 * Menu page function callback
 		 *
 		 * @return void
 		 */
-		
 		public function slate_wpap_menu_page() {
 
 			global $wpdb;
@@ -63,24 +80,7 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 				include_once plugin_dir_path( dirname( __FILE__ ) ) . '../views/template-page.php';
 			}
 		}
-	
-		/**
-		 * Update setting
-		 *
-		 * @return [type] [description]
-		 */
-		public function update_setting() {
-	
-		}
-	
-		/**
-		 * Update setting
-		 *
-		 * @return [type] [description]
-		 */
-		public function update_template() {
-			
-		}
+
 	
 		public function template_lister_button() {
 			?>
@@ -118,7 +118,7 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 														<label for="title"><?php _e( 'Template Title', 'slatewpap-template' ); ?></label>
 													</th>
 													<td>
-														<input id="template_title" name="title_template" type="text" style="width: 50%" value="<?php echo esc_attr( $title ); ?>" class="code" placeholder="<?php _e( 'Template Title', 'slatewpap-template' ); ?>">
+														<input id="template_title" name="template_title" type="text" style="width: 50%" value="<?php echo esc_attr( $title ); ?>" class="code" placeholder="<?php _e( 'Template Title', 'slatewpap-template' ); ?>">
 													</td>
 												</tr>
 												<tr class="form-field">
@@ -126,7 +126,7 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 														<label for="content"><?php _e( 'Template Description', 'slatewpap-template' ); ?></label>
 													</th>
 													<td>
-														<input id="template_description" name="description_template" type="text" style="width: 70%" value="<?php echo esc_attr( $title ); ?>" class="code" placeholder="<?php _e( 'Template Description', 'slatewpap-template' ); ?>">
+														<input id="template_description" name="template_description" type="text" style="width: 70%" value="<?php echo esc_attr( $title ); ?>" class="code" placeholder="<?php _e( 'Template Description', 'slatewpap-template' ); ?>">
 													</td>
 												</tr>
 											</tbody>
@@ -143,6 +143,57 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 			<?php
 		}
 
+
+
+	/**
+	 * Template update setting
+	 *
+	 * @return [type] [description]
+	 */
+	public function template_update_setting() {
+
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'wpaptemplates'; // do not forget about tables prefix
+
+		// this is default $item which will be used for new records
+
+		// here we are verifying does this request is post back and have correct nonce
+		if ( isset( $_POST ) && wp_verify_nonce( $_POST['security'], 'ntter_template' ) ) {
+
+		// String to array
+		parse_str( $_POST['value'], $itechArray );
+
+		// combine our default item with request params
+		// Collect data from - form request array
+			$items = array(
+				//'ID'               => $itechArray['ID'],
+				'template_title'  => $itechArray['template_title'],
+				'template_description' => $itechArray['template_description'],
+				// 'IP' => '::1',
+				// 'created' => '22nd February, 2021'
+			);
+
+		// validate data, and if all ok save item to database
+		// if id is zero insert otherwise update
+			$response = array();
+				$result = $wpdb->insert($table_name, $items);
+
+				if ( $result ) {
+					add_flash_notice( __( 'Template item updated.' ), 'success', true );
+					$response['updated'] = 'success';
+					$response['url']     = admin_url( 'admin.php?page=templates&updated=true' );
+				} else {
+					add_flash_notice( __( 'There was an error while updating item [Need something modify data]' ), 'error', true );
+					$response['url'] = admin_url( 'admin.php?page=templates&action=edit&id=' . $itechArray['ID'] );
+				}
+			
+
+				$return_success = array(
+					'exists' => $response,
+				);
+				wp_send_json_success( $return_success );
+		}
+	}
 
 		/**
 		 * Audio sub menu page
@@ -172,7 +223,7 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 			<div class="wrap">
 				<h1 class="wp-heading-inline"><?php _e( 'Audios', 'slatewpap-template' ); ?><a class="add-new-h2" href="<?php echo get_admin_url( get_current_blog_id(), 'admin.php?page=audios' ); ?>"><?php _e( 'Back to audios', 'slatewpap-template' ); ?></a></h1>
 				<hr class="wp-header-end">
-				<form id="editoraudio" method="POST">
+				<form id="editor_audio" method="POST">
 					<div class="metabox-holder" id="poststuff">
 						<div id="post-body">
 							<div id="post-body-content">
@@ -216,11 +267,12 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 												</tr>
 												<tr class="form-field">
 													<th valign="top" scope="row">
-														<label for="content"><?php _e( 'Audio processed or unprocessed', 'slatewpap-template' ); ?></label>
+														<label for="content"><?php _e( 'Processed / Unprocessed', 'slatewpap-template' ); ?></label>
 													</th>
 													<td>
-														<select id="audio_proorunpro">
-															<option value="processed" selected>Processed</option>
+														<select id="audio_proorunpro" name="audio_proorunpro">
+														<option value="" selected>Select Type</option>
+															<option value="processed">Processed</option>
 															<option value="unprocessed">Unprocessed</option>
 														</select>
 													</td>
@@ -230,8 +282,9 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 														<label for="content"><?php _e( 'Preset', 'slatewpap-template' ); ?></label>
 													</th>
 													<td>
-														<select id="audio_preset">
-															<option value="1" selected>1</option>
+														<select id="audio_preset" name="audio_preset">
+														<option value="" selected>Select Preset</option>
+															<option value="1">1</option>
 															<option value="2">2</option>
 															<option value="3">3</option>
 														</select>
@@ -242,9 +295,10 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 														<label for="content"><?php _e( 'Select Template', 'slatewpap-template' ); ?></label>
 													</th>
 													<td>
-														<select id="audio_template">
+														<select id="audio_template" name="audio_template">
+														<option value="" selected>Select Template</option>
 															<option value="1">1</option>
-															<option value="2" selected>2</option>
+															<option value="2">2</option>
 															<option value="3">3</option>
 														</select>
 													</td>
@@ -254,14 +308,14 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 														<label for="content"><?php _e( 'Audio File Upload', 'slatewpap-template' ); ?></label>
 													</th>
 													<td>
-														<input id="audio_file_upload" name="audio_file_upload" type="file" style="width: 70%" value="<?php echo esc_attr( $title ); ?>" class="code" placeholder="<?php _e( 'Audio File Upload', 'slatewpap-template' ); ?>">
+														<input id="audio_file_upload" name="audio_file_upload" type="file" style="width: 30%" value="<?php echo esc_attr( $title ); ?>" class="code" placeholder="<?php _e( 'Audio File Upload', 'slatewpap-template' ); ?>">
 													</td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
 								</div>
-								<input type="submit" value="<?php _e( 'Save Audio Data', 'slatewpap-template' ); ?>" class="button-primary" name="template_submit">
+								<input type="submit" value="<?php _e( 'Save Audio Data', 'slatewpap-template' ); ?>" class="button-primary" name="audio_submit">
 							</div>
 							</div>
 						</div>
@@ -270,6 +324,61 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 			</div>
 			<?php
 		}
+
+
+	/**
+	 * Audio update setting
+	 *
+	 * @return [type] [description]
+	 */
+	public function audio_update_setting() {
+
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'wpapaudios'; // do not forget about tables prefix
+
+		// this is default $item which will be used for new records
+
+		// here we are verifying does this request is post back and have correct nonce
+		if ( isset( $_POST ) && wp_verify_nonce( $_POST['security'], 'ntter_audio' ) ) {
+
+		// String to array
+		parse_str( $_POST['value'], $itechArray );
+
+		// combine our default item with request params
+		// Collect data from - form request array
+			$items = array(
+				//'ID'               => $itechArray['ID'],
+				'audio_title'  => $itechArray['audio_title'],
+				'audio_description' => $itechArray['audio_description'],
+				'audio_prounpro' => $itechArray['audio_proorunpro'],
+				'audio_preset' => $itechArray['audio_preset'],
+				'template' => $itechArray['audio_template'],
+				'audio_file' => $itechArray['audio_file_upload']
+				// 'IP' => '::1',
+				// 'created' => '22nd February, 2021'
+			);
+
+		// validate data, and if all ok save item to database
+		// if id is zero insert otherwise update
+			$response = array();
+				$result = $wpdb->insert($table_name, $items);
+
+				if ( $result ) {
+					add_flash_notice( __( 'Audio item updated.' ), 'success', true );
+					$response['updated'] = 'success';
+					$response['url']     = admin_url( 'admin.php?page=audios&updated=true' );
+				} else {
+					add_flash_notice( __( 'There was an error while updating item [Need something modify data]' ), 'error', true );
+					$response['url'] = admin_url( 'admin.php?page=audios&action=edit&id=' . $itechArray['ID'] );
+				}
+			
+
+				$return_success = array(
+					'exists' => $response,
+				);
+				wp_send_json_success( $return_success );
+		}
+	}
 
 	}
 }
