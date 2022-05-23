@@ -88,11 +88,11 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 				<h1 class="wp-heading-inline"><?php _e( 'Templates', 'slatewpap-template' ); ?><a class="add-new-h2" href="<?php echo get_admin_url( get_current_blog_id(), 'admin.php?page=templates' ); ?>"><?php _e( 'Back to templates', 'slatewpap-template' ); ?></a></h1>
 				<hr class="wp-header-end">
 				<form id="editor_template" method="POST">
-					<div class="metabox-holder" id="poststuff">
+					<div class="metabox-holder" id="templatestuff">
 						<div id="post-body">
 							<div id="post-body-content">
 								<div class="normal-sortables">
-								<div id="persons_form_meta_box" class="postbox">
+								<div id="template_form_meta_box" class="postbox">
 									<div class="postbox-header">
 										<h2 class="hndle">Create Template</h2>
 									</div>
@@ -172,12 +172,12 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 			<div class="wrap">
 				<h1 class="wp-heading-inline"><?php _e( 'Audios', 'slatewpap-template' ); ?><a class="add-new-h2" href="<?php echo get_admin_url( get_current_blog_id(), 'admin.php?page=audios' ); ?>"><?php _e( 'Back to audios', 'slatewpap-template' ); ?></a></h1>
 				<hr class="wp-header-end">
-				<form id="editor_template" method="POST">
+				<form id="editoraudio" method="POST">
 					<div class="metabox-holder" id="poststuff">
 						<div id="post-body">
 							<div id="post-body-content">
 								<div class="normal-sortables">
-								<div id="persons_form_meta_box" class="postbox">
+								<div id="audio_form_meta_box" class="postbox">
 									<div class="postbox-header">
 										<h2 class="hndle">Create Audio</h2>
 									</div>

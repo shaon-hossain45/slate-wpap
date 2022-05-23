@@ -30,7 +30,39 @@ class Slate_Wpap_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+		self::add_version();
+		self::create_table();
+	}
 
+	/**
+	 * Add time and version on DB
+	 */
+	protected static function add_version() {
+		$installed = get_option( 'wd_slatewpap_version' );
+
+		if ( ! $installed ) {
+			update_option( 'wd_slatewpap_version', time() );
+		}
+
+		update_option( 'wd_slatewpap_version', SLATE_WPAP_VERSION );
+	}
+
+	protected static function create_table() {
+		global $wpdb;
+
+		$charset_collate = $wpdb->get_charset_collate();
+
+		$schema = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}slatewpap` (
+          `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		  `template_title` varchar(100) NOT NULL,
+          `template_description` varchar(500) NOT NULL,
+        ) $charset_collate";
+
+		if ( ! function_exists( 'dbDelta' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		}
+
+		dbDelta( $schema );
 	}
 
 }
