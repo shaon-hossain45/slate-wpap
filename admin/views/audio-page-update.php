@@ -49,11 +49,24 @@
                             $filepath = '';
                         }
 
-						// if ( ! empty( $item['audio_description'] ) ) {
-                        //     $content = $item['audio_description'];
-                        // } else {
-                        //     $content = '';
-                        // }
+						if ( ! empty( $item['audio_prounpro'] ) ) {
+                            $prounpro = $item['audio_prounpro'];
+                        } else {
+                            $prounpro = '';
+                        }
+
+						if ( ! empty( $item['audio_preset'] ) ) {
+                            $preset = $item['audio_preset'];
+                        } else {
+                            $preset = '';
+                        }
+
+
+						if ( ! empty( $item['template'] ) ) {
+                            $template = $item['template'];
+                        } else {
+                            $template = '';
+                        }
 
                         ?>
 						<div class="inside">
@@ -72,7 +85,7 @@
 											<label for="content"><?php _e( 'Audio Description', 'slatewpap-template' ); ?></label>
 										</th>
 										<td>
-											<input id="audio_description" name="audio_description" type="text" style="width: 70%" value="<?php echo esc_attr( $title ); ?>" class="code" placeholder="<?php _e( 'Audio Description', 'slatewpap-template' ); ?>">
+											<input id="audio_description" name="audio_description" type="text" style="width: 70%" value="<?php echo esc_attr( $content ); ?>" class="code" placeholder="<?php _e( 'Audio Description', 'slatewpap-template' ); ?>">
 										</td>
 									</tr>
 									<tr class="form-field">
@@ -81,9 +94,9 @@
 										</th>
 										<td>
 											<select id="audio_proorunpro" name="audio_proorunpro">
-											<option value="" selected>Select Type</option>
-												<option value="processed">Processed</option>
-												<option value="unprocessed">Unprocessed</option>
+											<option value="">Select Type</option>
+												<option value="processed" <?php if($prounpro == "processed"){ echo "selected";}; ?>>Processed</option>
+												<option value="unprocessed" <?php if($prounpro == "unprocessed"){ echo "selected";}; ?>>Unprocessed</option>
 											</select>
 										</td>
 									</tr>
@@ -93,10 +106,10 @@
 										</th>
 										<td>
 											<select id="audio_preset" name="audio_preset">
-											<option value="" selected>Select Preset</option>
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
+											<option value="">Select Preset</option>
+												<option value="1" <?php if($preset == "1"){ echo "selected";}; ?>>1</option>
+												<option value="2" <?php if($preset == "2"){ echo "selected";}; ?>>2</option>
+												<option value="3" <?php if($preset == "3"){ echo "selected";}; ?>>3</option>
 											</select>
 										</td>
 									</tr>
@@ -106,15 +119,18 @@
 										</th>
 										<td>
 											<select id="audio_template" name="audio_template">
-											<option value="" selected>Select Template</option>
+											<option value="">Select Template</option>
 											<?php
 											global $wpdb;
 											$table_name = $wpdb->prefix . 'wpaptemplates'; // do not forget about tables prefix
 											$results = $wpdb->get_results("SELECT * FROM $table_name");
+
 											if(!empty($results)){
 												foreach( $results as $result ) {
+
+													if($template == $result->ID){ $outselect ="selected";}
 												
-												echo '<option value="'.$result->ID.'">'.$result->template_title.'</option>';
+												echo '<option value="'.$result->ID.'"'.$outselect.'>'.$result->template_title.'</option>';
 												
 												}
 											}

@@ -214,8 +214,6 @@ public function template_update_setting(){
 	// if id is zero insert otherwise update
 		$response = array();
 
-		//$item = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table_name WHERE ID = %d", $itechArray['ID'] ), ARRAY_A );
-
 			$where = array(
 				'ID'	=> $itechArray['ID']
 			);
@@ -390,7 +388,7 @@ public function template_update_setting(){
 
 
 	/**
-	 * Audio update setting
+	 * Audio insert setting
 	 *
 	 * @return [type] [description]
 	 */
@@ -442,6 +440,65 @@ public function template_update_setting(){
 				wp_send_json_success( $return_success );
 		}
 	}
+
+
+	/**
+	 * Audio update setting
+	 *
+	 * @return [type] [description]
+	 */
+	public function audio_update_setting() {
+
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'wpapaudios'; // do not forget about tables prefix
+
+		// this is default $item which will be used for new records
+
+
+		//var_dump($_POST['value']);
+		// here we are verifying does this request is post back and have correct nonce
+		if ( isset( $_POST ) && wp_verify_nonce( $_POST['security'], 'ntte5555r_audio' ) ) {
+
+		// String to array
+		parse_str( $_POST['value'], $itechArray );
+
+		// combine our default item with request params
+		// Collect data from - form request array
+			$items = array(
+				//'ID'               => $itechArray['ID'],
+				'audio_name'  => $itechArray['audio_title'],
+				'audio_description' => $itechArray['audio_description'],
+				'audio_prounpro' => $itechArray['audio_proorunpro'],
+				'audio_preset' => $itechArray['audio_preset'],
+				'template' => $itechArray['audio_template'],
+				'audio_file' => $itechArray['prefix_custom_options']
+			);
+
+		// validate data, and if all ok save item to database
+		// if id is zero insert otherwise update
+			$response = array();
+				$where = array(
+				'ID'	=> $itechArray['ID']
+			);
+			$result = $wpdb->update( $table_name, $items, $where);
+
+				if ( $result ) {
+					add_flash_notice( __( 'Audio item updated.' ), 'success', true );
+					$response['updated'] = 'success';
+					$response['url']     = admin_url( 'admin.php?page=audios&updated=true' );
+				} else {
+					add_flash_notice( __( 'There was an error while updating item [Need something modify data]' ), 'error', true );
+					$response['url'] = admin_url( 'admin.php?page=audios&action=edit&id=' . $itechArray['ID'] );
+				}
+			
+
+				$return_success = array(
+					'exists' => $response,
+				);
+				wp_send_json_success( $return_success );
+		}
+	}
+
 
 	}
 }

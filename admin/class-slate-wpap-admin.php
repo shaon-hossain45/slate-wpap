@@ -143,7 +143,7 @@ class Slate_Wpap_Admin {
 				);
 
 
-		wp_enqueue_script( 'inewsletter-audio', plugin_dir_url( __FILE__ ) . 'js/slate-wpap-audio-update.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'inewsletter-audio', plugin_dir_url( __FILE__ ) . 'js/slate-wpap-audio-insert.js', array( 'jquery' ), $this->version, false );
 		$ajax_nonce = wp_create_nonce( 'ntter_audio' );
 
 				wp_localize_script(
@@ -157,8 +157,22 @@ class Slate_Wpap_Admin {
 				);
 
 
+		wp_enqueue_script( 'inewsletterupd-audio', plugin_dir_url( __FILE__ ) . 'js/slate-wpap-audio-update.js', array( 'jquery' ), $this->version, false );
+		$ajax_nonce = wp_create_nonce( 'ntte5555r_audio' );
 
-				
+				wp_localize_script(
+					'inewsletterupd-audio',
+					'pluginkl888l_obj',
+					array(
+						'ajax_url' => admin_url( 'admin-post.php' ),
+						'action'   => 'audio_update_setting',
+						'security' => $ajax_nonce,
+					)
+				);
+
+
+
+
 		wp_enqueue_media();
 		wp_enqueue_script( 'cmb-media', plugin_dir_url( __FILE__ ) . 'js/state-wpap-media.js', array( 'jquery' ), $this->version, true );
 

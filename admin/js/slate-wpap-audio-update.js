@@ -170,11 +170,11 @@
 
             var data = {
                 value: formData,
-                action: pluginkll_obj.action,
-                security: pluginkll_obj.security,
+                action: pluginkl888l_obj.action,
+                security: pluginkl888l_obj.security,
             };
 
-            $.post(pluginkll_obj.ajax_url, data, function(response) {
+            $.post(pluginkl888l_obj.ajax_url, data, function(response) {
 
                 if (response['data']['exists']['updated'] == 'success') {
                     window.location.href = response['data']['exists']['url'];
