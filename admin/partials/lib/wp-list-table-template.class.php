@@ -63,7 +63,7 @@ class Custom_List_Table_Template extends WP_List_Table {
 	 * @param $item - row (key, value array)
 	 * @return HTML
 	 */
-	function column_template_name( $item ) {
+	function column_template_title( $item ) {
 		// Build delete row action.
 		$delete_query_args = array(
 			'page'   => 'wpaptemplates',
@@ -71,13 +71,13 @@ class Custom_List_Table_Template extends WP_List_Table {
 			'id'     => $item['ID'],
 		);
 		$actions           = array(
-			'edit'   => sprintf( '<a href="?page=wpaptemplates&action=edit&id=%s">%s</a>', $item['ID'], __( 'Edit', 'cltd_example' ) ),
+			'edit'   => sprintf( '<a href="?page=templates&action=edit&id=%s">%s</a>', $item['ID'], __( 'Edit', 'cltd_example' ) ),
 			'delete' => sprintf( '<a href="%1$s">%2$s</a>', esc_url( wp_nonce_url( add_query_arg( $delete_query_args, 'admin.php' ), 'deletewpaptemplate' ) ), _x( 'Delete', 'List table row action', 'wp-list-table-example' ) ),
 		);
 
 		return sprintf(
 			'%s %s',
-			$item['template_name'],
+			$item['template_title'],
 			$this->row_actions( $actions )
 		);
 	}
@@ -132,7 +132,7 @@ class Custom_List_Table_Template extends WP_List_Table {
 	 * @return [type] [description]
 	 */
 	public function no_items() {
-		_e( 'No wpaptemplate items found.' );
+		_e( 'No wpap template items found.' );
 	}
 	/**
 	 * iTechPublic delete activity
@@ -201,7 +201,7 @@ class Custom_List_Table_Template extends WP_List_Table {
 	function get_bulk_actions() {
 		$actions = array(
 			'bulk-delete'         => 'Delete',
-			'email_to_template' => 'Email To template',
+			'bulk-edit' => 'Edit',
 		);
 		return $actions;
 	}

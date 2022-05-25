@@ -41,7 +41,7 @@
      * @param  {[type]}    [description]
      * @return {[type]}    [description]
      */
-    $(document).on('submit', 'form#update_audio', function(e) {
+    $(document).on('submit', 'form#editor_audio', function(e) {
         // Stop Multiple form submission
         e.preventDefault();
         //alert("Hi audio");

@@ -36,7 +36,7 @@
      * @param  {[type]}    [description]
      * @return {[type]}    [description]
      */
-    $(document).on('submit', 'form#update_template', function(e) {
+    $(document).on('submit', 'form#editor_template', function(e) {
         // Stop Multiple form submission
         e.preventDefault();
         //alert("Hi man");
@@ -87,12 +87,12 @@
              */
             var data = {
                 value: form.serialize(),
-                action: plugin_obj.action,
-                security: plugin_obj.security,
-                ajax_url: plugin_obj.ajax_url
+                action: pluginins_obj.action,
+                security: pluginins_obj.security,
+                ajax_url: pluginins_obj.ajax_url
             };
 
-            $.post(plugin_obj.ajax_url, data, function(response) {
+            $.post(pluginins_obj.ajax_url, data, function(response) {
 
                 if (response['data']['exists']['updated'] == 'success') {
                     window.location.href = response['data']['exists']['url'];

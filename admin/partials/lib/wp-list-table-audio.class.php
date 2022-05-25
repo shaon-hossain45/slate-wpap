@@ -63,7 +63,7 @@ class Custom_List_Table_Audio extends WP_List_Table {
 	 * @param $item - row (key, value array)
 	 * @return HTML
 	 */
-	function column_template_name( $item ) {
+	function column_audio_name( $item ) {
 		// Build delete row action.
 		$delete_query_args = array(
 			'page'   => 'wpapaudios',
@@ -71,13 +71,13 @@ class Custom_List_Table_Audio extends WP_List_Table {
 			'id'     => $item['ID'],
 		);
 		$actions           = array(
-			'edit'   => sprintf( '<a href="?page=wpapaudios&action=edit&id=%s">%s</a>', $item['ID'], __( 'Edit', 'cltd_example' ) ),
+			'edit'   => sprintf( '<a href="?page=audios&action=edit&id=%s">%s</a>', $item['ID'], __( 'Edit', 'cltd_example' ) ),
 			'delete' => sprintf( '<a href="%1$s">%2$s</a>', esc_url( wp_nonce_url( add_query_arg( $delete_query_args, 'admin.php' ), 'deletewpapaudio' ) ), _x( 'Delete', 'List table row action', 'wp-list-table-example' ) ),
 		);
 
 		return sprintf(
 			'%s %s',
-			$item['template_name'],
+			$item['audio_name'],
 			$this->row_actions( $actions )
 		);
 	}
@@ -107,7 +107,7 @@ class Custom_List_Table_Audio extends WP_List_Table {
 			'cb'               => '<input type="checkbox" />', // Render a checkbox instead of text
 			'audio_name'  => __( 'Audio Name', 'cltd_example' ),
 			'audio_description' => __( 'Audio Description', 'cltd_example' ),
-			'audio_processed_or_unprocessed' => __( 'Processed / Unprocessed', 'cltd_example' ),
+			'audio_prounpro' => __( 'Processed / Unprocessed', 'cltd_example' ),
 		);
 		return $columns;
 	}
@@ -134,7 +134,7 @@ class Custom_List_Table_Audio extends WP_List_Table {
 	 * @return [type] [description]
 	 */
 	public function no_items() {
-		_e( 'No wpapaudio items found.' );
+		_e( 'No wpap audio items found.' );
 	}
 	/**
 	 * iTechPublic delete activity
@@ -177,12 +177,12 @@ class Custom_List_Table_Audio extends WP_List_Table {
 		$all_url      = remove_query_arg( array( 'filter', 's', 'paged', 'alert', 'user' ) );
 		$views['all'] = "<a href='{$all_url }' {$class} >" . __( 'All', 'cltd_example' ) . ' <span class="count">(' . number_format( $this->itechpublic_get_filter_count() ) . ')</span></a>';
 		$views_item   = array(
-			'verified' => array(
-				'name'      => __( 'Verified', 'cltd_example' ),
+			'audio_name' => array(
+				'name'      => __( 'Audio Name', 'cltd_example' ),
 				'status_id' => 1,
 			),
-			'register' => array(
-				'name'      => __( 'Register', 'cltd_example' ),
+			'audio_description' => array(
+				'name'      => __( 'Audio Description', 'cltd_example' ),
 				'status_id' => 2,
 			),
 		);
@@ -203,7 +203,7 @@ class Custom_List_Table_Audio extends WP_List_Table {
 	function get_bulk_actions() {
 		$actions = array(
 			'bulk-delete'         => 'Delete',
-			'email_to_template' => 'Email To template',
+			'bulk-edit' => 'Edit',
 		);
 		return $actions;
 	}
@@ -275,26 +275,26 @@ class Custom_List_Table_Audio extends WP_List_Table {
 	 * @param  [type] $data [description]
 	 * @return [type]       [description]
 	 */
-	public function itechpublic_sub_wp_mail( $data ) {
-		global $wpdb;
-		$table_name       = $wpdb->prefix . 'wpapaudios';
-		$template_email = $wpdb->get_var( $wpdb->prepare( "SELECT template_email FROM $table_name WHERE ID = %d", $data ) );
-		$site_name        = get_bloginfo( 'name' );
-		$options          = get_option( 'email_template_store' );
-		$htmltitle        = $options['email_template_title'];
-		$htmlcontent      = $options['email_template_content'];
+	// public function itechpublic_sub_wp_mail( $data ) {
+	// 	global $wpdb;
+	// 	$table_name       = $wpdb->prefix . 'wpapaudios';
+	// 	$template_email = $wpdb->get_var( $wpdb->prepare( "SELECT template_email FROM $table_name WHERE ID = %d", $data ) );
+	// 	$site_name        = get_bloginfo( 'name' );
+	// 	$options          = get_option( 'email_template_store' );
+	// 	$htmltitle        = $options['email_template_title'];
+	// 	$htmlcontent      = $options['email_template_content'];
 
-		$subject = sprintf( __( '[%1$s] %2$s' ), $site_name, $htmltitle );
-		$headers = array( 'Content-Type: text/html; charset=UTF-8', 'From: iTechPublic <https://itechpublic.com>' );
-		$wp_mail = wp_mail( $template_email, $subject, $htmlcontent, $headers );
+	// 	$subject = sprintf( __( '[%1$s] %2$s' ), $site_name, $htmltitle );
+	// 	$headers = array( 'Content-Type: text/html; charset=UTF-8', 'From: iTechPublic <https://itechpublic.com>' );
+	// 	$wp_mail = wp_mail( $template_email, $subject, $htmlcontent, $headers );
 
-		if ( ! is_wp_error( $wp_mail ) ) {
-			add_flash_notice( __( 'Email sent successfull.' ), 'success', true );
-			$redirect_to = admin_url( 'admin.php?page=wpapaudios' );
-				wp_redirect( $redirect_to );
-				exit;
-		}
-	}
+	// 	if ( ! is_wp_error( $wp_mail ) ) {
+	// 		add_flash_notice( __( 'Email sent successfull.' ), 'success', true );
+	// 		$redirect_to = admin_url( 'admin.php?page=wpapaudios' );
+	// 			wp_redirect( $redirect_to );
+	// 			exit;
+	// 	}
+	// }
 
 	/**
 	 * [REQUIRED] This is the most important method

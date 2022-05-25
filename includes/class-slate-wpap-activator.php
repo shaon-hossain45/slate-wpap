@@ -64,14 +64,14 @@ class Slate_Wpap_Activator {
         ) $charset_collate";
 
 
-		$schema = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}wpapaudios` (
+		$schema2 = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}wpapaudios` (
 			`ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`audio_title` varchar(100) NOT NULL,
+			`audio_name` varchar(100) NOT NULL,
 			`audio_description` varchar(1000) NOT NULL,
 			`audio_prounpro` varchar(100) NOT NULL,
 			`audio_preset` varchar(100) NOT NULL,
 			`template` varchar(100) NOT NULL,
-			`audio_file` varchar(100) NOT NULL
+			`audio_file` varchar(10000) NOT NULL
 		) $charset_collate";
 
 
@@ -80,6 +80,7 @@ class Slate_Wpap_Activator {
 		}
 
 		dbDelta( $schema );
+		dbDelta( $schema2 );
 	}
 
 }

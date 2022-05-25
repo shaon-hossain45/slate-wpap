@@ -117,11 +117,23 @@ class Slate_Wpap_Admin {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/slate-wpap-admin.js', array( 'jquery' ), $this->version, false );
 
-		wp_enqueue_script( 'inewsletter-template', plugin_dir_url( __FILE__ ) . 'js/slate-wpap-template-update.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'inewsletter-template', plugin_dir_url( __FILE__ ) . 'js/slate-wpap-template-insert.js', array( 'jquery' ), $this->version, false );
 		$ajax_nonce = wp_create_nonce( 'ntter_template' );
 
 				wp_localize_script(
 					'inewsletter-template',
+					'pluginins_obj',
+					array(
+						'ajax_url' => admin_url( 'admin-post.php' ),
+						'action'   => 'template_insert_setting',
+						'security' => $ajax_nonce,
+					)
+				);
+
+		wp_enqueue_script( 'inewsletter-updtemplate', plugin_dir_url( __FILE__ ) . 'js/slate-wpap-template-update.js', array( 'jquery' ), $this->version, false );
+		$ajax_nonce = wp_create_nonce( 'ntterupd_template' );
+				wp_localize_script(
+					'inewsletter-updtemplate',
 					'plugin_obj',
 					array(
 						'ajax_url' => admin_url( 'admin-post.php' ),
@@ -136,13 +148,19 @@ class Slate_Wpap_Admin {
 
 				wp_localize_script(
 					'inewsletter-audio',
-					'plugin_obj',
+					'pluginkll_obj',
 					array(
 						'ajax_url' => admin_url( 'admin-post.php' ),
-						'action'   => 'audio_update_setting',
+						'action'   => 'audio_insert_setting',
 						'security' => $ajax_nonce,
 					)
 				);
+
+
+
+				
+		wp_enqueue_media();
+		wp_enqueue_script( 'cmb-media', plugin_dir_url( __FILE__ ) . 'js/state-wpap-media.js', array( 'jquery' ), $this->version, true );
 
 	}
 
