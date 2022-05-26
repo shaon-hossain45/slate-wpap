@@ -66,7 +66,7 @@ class Custom_List_Table_Audio extends WP_List_Table {
 	function column_audio_name( $item ) {
 		// Build delete row action.
 		$delete_query_args = array(
-			'page'   => 'wpapaudios',
+			'page'   => 'audios',
 			'action' => 'delete',
 			'id'     => $item['ID'],
 		);
@@ -226,7 +226,7 @@ class Custom_List_Table_Audio extends WP_List_Table {
 				self::itechpublic_delete_activity( absint( $_REQUEST['id'] ) );
 
 				add_flash_notice( __( '1 wpapaudio item permanently deleted.' ), 'success', true );
-				$redirect_to = admin_url( 'admin.php?page=wpapaudios&deleted=true' );
+				$redirect_to = admin_url( 'admin.php?page=audios&deleted=true' );
 				wp_redirect( $redirect_to );
 				exit;
 			}
@@ -248,12 +248,12 @@ class Custom_List_Table_Audio extends WP_List_Table {
 					$counter = $counter . ' wpapaudio item';
 				}
 				add_flash_notice( __( $counter . ' permanently deleted.' ), 'success', true );
-				$redirect_to = admin_url( 'admin.php?page=wpapaudios&deleted=true' );
+				$redirect_to = admin_url( 'admin.php?page=audios&deleted=true' );
 				wp_redirect( $redirect_to );
 				exit;
 			} else {
 				add_flash_notice( __( 'Something wrong.' ), 'error', true );
-				$redirect_to = admin_url( 'admin.php?page=wpapaudios&deleted=false' );
+				$redirect_to = admin_url( 'admin.php?page=audios&deleted=false' );
 				wp_redirect( $redirect_to );
 				exit;
 			}

@@ -144,7 +144,7 @@ class Slate_Wpap_Admin {
 
 
 		wp_enqueue_script( 'inewsletter-audio', plugin_dir_url( __FILE__ ) . 'js/slate-wpap-audio-insert.js', array( 'jquery' ), $this->version, false );
-		$ajax_nonce = wp_create_nonce( 'ntter_audio' );
+		$ajax_nonce = wp_create_nonce( 'nt55ter_audio' );
 
 				wp_localize_script(
 					'inewsletter-audio',

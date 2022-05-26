@@ -399,11 +399,9 @@ public function template_update_setting(){
 
 		// this is default $item which will be used for new records
 
-
-		//var_dump($_POST['value']);
 		// here we are verifying does this request is post back and have correct nonce
-		if ( isset( $_POST ) && wp_verify_nonce( $_POST['security'], 'ntter_audio' ) ) {
-
+		if ( isset( $_POST ) && wp_verify_nonce( $_POST['security'], 'nt55ter_audio' ) ) {
+			//var_dump($_POST['value']);
 		// String to array
 		parse_str( $_POST['value'], $itechArray );
 

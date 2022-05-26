@@ -66,7 +66,7 @@ class Custom_List_Table_Template extends WP_List_Table {
 	function column_template_title( $item ) {
 		// Build delete row action.
 		$delete_query_args = array(
-			'page'   => 'wpaptemplates',
+			'page'   => 'templates',
 			'action' => 'delete',
 			'id'     => $item['ID'],
 		);
@@ -107,6 +107,7 @@ class Custom_List_Table_Template extends WP_List_Table {
 			'cb'               => '<input type="checkbox" />', // Render a checkbox instead of text
 			'template_title'  => __( 'Template Title', 'cltd_example' ),
 			'template_description' => __( 'Template Description', 'cltd_example' ),
+			'template_shortcode' => __( 'Template Shortcode', 'cltd_example' ),
 		);
 		return $columns;
 	}
@@ -224,7 +225,7 @@ class Custom_List_Table_Template extends WP_List_Table {
 				self::itechpublic_delete_activity( absint( $_REQUEST['id'] ) );
 
 				add_flash_notice( __( '1 wpaptemplate item permanently deleted.' ), 'success', true );
-				$redirect_to = admin_url( 'admin.php?page=wpaptemplates&deleted=true' );
+				$redirect_to = admin_url( 'admin.php?page=templates&deleted=true' );
 				wp_redirect( $redirect_to );
 				exit;
 			}
@@ -246,12 +247,12 @@ class Custom_List_Table_Template extends WP_List_Table {
 					$counter = $counter . ' wpaptemplate item';
 				}
 				add_flash_notice( __( $counter . ' permanently deleted.' ), 'success', true );
-				$redirect_to = admin_url( 'admin.php?page=wpaptemplates&deleted=true' );
+				$redirect_to = admin_url( 'admin.php?page=templates&deleted=true' );
 				wp_redirect( $redirect_to );
 				exit;
 			} else {
 				add_flash_notice( __( 'Something wrong.' ), 'error', true );
-				$redirect_to = admin_url( 'admin.php?page=wpaptemplates&deleted=false' );
+				$redirect_to = admin_url( 'admin.php?page=templates&deleted=false' );
 				wp_redirect( $redirect_to );
 				exit;
 			}

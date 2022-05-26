@@ -59,15 +59,15 @@ class Slate_Wpap_Activator {
 
 		$schema = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}wpaptemplates` (
           `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		  `template_title` varchar(100) NOT NULL,
-		  `template_description` varchar(1000) NOT NULL
+		  `template_title` varchar(500) NOT NULL,
+		  `template_description` varchar(5000) NOT NULL
         ) $charset_collate";
 
 
 		$schema2 = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}wpapaudios` (
 			`ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
-			`audio_name` varchar(100) NOT NULL,
-			`audio_description` varchar(1000) NOT NULL,
+			`audio_name` varchar(500) NOT NULL,
+			`audio_description` varchar(5000) NOT NULL,
 			`audio_prounpro` varchar(100) NOT NULL,
 			`audio_preset` varchar(100) NOT NULL,
 			`template` varchar(100) NOT NULL,
