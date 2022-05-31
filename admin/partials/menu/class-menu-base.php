@@ -13,6 +13,7 @@
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/wp-list-table-template.class.php';
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/wp-list-table-audio.class.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'lib/wp-list-table-shortcode.class.php';
 
 if ( ! class_exists( 'MenuBaseSetup' ) ) {
 	class MenuBaseSetup {
@@ -37,6 +38,7 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 
 			add_action( 'admin_post_audio_update_setting', array( $this, 'audio_update_setting' ) );
 			add_action( 'admin_post_nopriv_audio_update_setting', array( $this, 'audio_update_setting' ) );
+
 		}
 
 		/**
@@ -137,7 +139,7 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 		}
 
 	/**
-	 * Template update setting
+	 * Template insert setting
 	 *
 	 * @return [type] [description]
 	 */
@@ -154,13 +156,34 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 		// String to array
 		parse_str( $_POST['value'], $itechArray );
 
+		//$last_db_id = $wpdb->get_var( $wpdb->prepare( "SELECT * FROM $table_name ORDER BY ID DESC LIMIT 1" ) );
+		//var_dump($last_db_id);
+//if($last_db_id == NULL){
+	//$last_db_id = "0";
+//}
+
+
+// $get_id = $wpdb->get_row(SELECT AUTO_INCREMENT
+// FROM information_schema.TABLES
+// WHERE TABLE_SCHEMA = "yourDatabaseName"
+// AND TABLE_NAME = "yourTableName");
+// $last_id = $get_id>Auto_increment;
+// $next_id = $last_id + 1;
+//[template label="'.$last_db_id.'"]
+
+
+//var_dump($get_id);
+
+//$last_db_id = get_option( 'last_template_id' )+1;
+
+
 		// combine our default item with request params
 		// Collect data from - form request array
 			$items = array(
 				//'ID'               => $itechArray['ID'],
 				'template_title'  => $itechArray['template_title'],
 				'template_description' => $itechArray['template_description'],
-				// 'IP' => '::1',
+				'template_shortcode' => '',
 				// 'created' => '22nd February, 2021'
 			);
 
@@ -169,7 +192,29 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 			$response = array();
 				$result = $wpdb->insert($table_name, $items);
 
+				$lastid = $wpdb->insert_id;
+
 				if ( $result ) {
+
+					if ( !empty($lastid) || !is_null($lastid) ) {
+						//$item = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table_name WHERE ID = %d", $lastid ), ARRAY_A );
+						//if ( $item ) {
+							$items = array(
+								//'ID'               => $itechArray['ID'],
+								//'template_title'  => $itechArray['template_title'],
+								//'template_description' => $itechArray['template_description'],
+								'template_shortcode' => '[shortcode label="'.$lastid.'"]',
+								// 'created' => '22nd February, 2021'
+							);
+
+							$where = array(
+								'ID'	=> $lastid
+							);
+							$result_update = $wpdb->update( $table_name, $items, $where);
+						//}
+					}
+					//update_option( 'last_template_id', $lastid );
+
 					add_flash_notice( __( 'Template item updated.' ), 'success', true );
 					$response['updated'] = 'success';
 					$response['url']     = admin_url( 'admin.php?page=templates&updated=true' );
@@ -187,7 +232,11 @@ if ( ! class_exists( 'MenuBaseSetup' ) ) {
 	}
 
 
-
+	/**
+	 * Template update setting
+	 *
+	 * @return [type] [description]
+	 */
 public function template_update_setting(){
 	global $wpdb;
 	$table_name = $wpdb->prefix . 'wpaptemplates'; // do not forget about tables prefix
@@ -497,6 +546,29 @@ public function template_update_setting(){
 		}
 	}
 
+
+	/**
+		 * Shortcode sub menu page
+		 *
+		 * @return [type] [description]
+		 */
+		public function slate_wpap_sub_menu_page_shortcode() {
+
+			global $wpdb;
+			$table = new Custom_List_Table_Shortcode();
+			$table->prepare_items();
+
+			$message = '';
+
+
+			if( isset( $_GET['template'] ) && ( $_GET['template'] == 'create' ) ){
+				$this->template_lister_create();
+			}else if( isset( $_GET['action'] ) && ( $_GET['action'] == 'edit' ) ){
+				include plugin_dir_path( dirname( __FILE__ ) ) . '../views/template-update-page.php';
+			}else{
+				include_once plugin_dir_path( dirname( __FILE__ ) ) . '../views/template-page.php';
+			}
+		}
 
 	}
 }

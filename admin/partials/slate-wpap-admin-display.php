@@ -25,7 +25,7 @@
  * @package    Public_Popularity
  * @subpackage Public_Popularity/admin/partials
  */
-class Custom_wpap_Admin_Display {
+class Custom_Wpap_Admin_Display {
 	/**
 	 * Initialize the class and set its properties.
 	 *

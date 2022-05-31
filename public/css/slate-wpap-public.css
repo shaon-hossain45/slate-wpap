@@ -2,3 +2,401 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+
+/* Start the audio visualization */
+
+.goJgHx {
+    width: 100%;
+    background-color: slategrey;
+}
+
+.cTsXBC.cTsXBC {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 72px;
+}
+
+.cijqyD.cijqyD {
+    font-weight: 700;
+    color: #fff;
+}
+
+.fueCpv {
+    margin-top: 0px;
+    margin-bottom: 16px;
+}
+
+.dnFFqQ {
+    color: rgb(249, 250, 251);
+    font-size: 2.4rem;
+    line-height: 52px;
+}
+
+.pzTSG {
+    display: flex;
+    flex-direction: row;
+    --gap: 4px;
+    margin: calc(-1 * var(--gap)) 0 0 calc(-1 * var(--gap));
+    width: calc(100% + var(--gap));
+}
+
+.pzTSG>div {
+    margin: var(--gap) 0 0 var(--gap);
+}
+
+.bwrXcM {
+    color: rgb(249, 250, 251);
+    border: 1px solid rgb(67, 82, 97);
+    background-color: rgb(67, 82, 97);
+}
+
+.hfdeKa {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.loSPxB {
+    display: inline-flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    place-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    user-select: none;
+    color: rgb(249, 250, 251);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(90, 103, 116);
+    font-size: 1rem;
+    height: 36px;
+    padding: 0px 8px;
+    gap: 8px;
+    border-radius: 100rem;
+    cursor: pointer;
+}
+
+.dTIbbW.dTIbbW {
+    margin-top: 48px;
+    min-height: 40px;
+}
+
+.kXTa-dH.kXTa-dH {
+    font-weight: 700;
+    color: #fff;
+}
+
+.klUNet {
+    color: inherit;
+    font-size: 1rem;
+    line-height: 24px;
+}
+
+.hOMQsu.hOMQsu {
+    margin-top: 8px;
+}
+
+.Vhpvz {
+    margin-top: 0px;
+    margin-bottom: 16px;
+}
+
+.pGoms {
+    color: rgb(249, 250, 251);
+    font-size: 1rem;
+    line-height: 24px;
+}
+
+.cUdOut {
+    appearance: none;
+    display: inline-flex;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    width: auto;
+    border: none;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-weight: bold;
+    padding: 0px 16px;
+    text-decoration: none;
+    user-select: none;
+    transition: all 300ms ease-in-out 0s;
+    border-radius: 100rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    height: 48px;
+    min-width: 48px;
+    color: rgb(12, 27, 43);
+    background-color: rgb(249, 250, 251);
+}
+
+.ijwRcr {
+    position: relative;
+    display: flex;
+    -webkit-box-pack: center;
+    place-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.cArTYD {
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+    position: absolute !important;
+}
+
+.dgPvYb {
+    margin-right: 8px;
+}
+
+.ljqiUU {
+    border-radius: 100rem;
+}
+
+.gxTSWG {
+    position: relative;
+    width: 48px;
+    height: 24px;
+    display: flex;
+    -webkit-box-pack: center;
+    place-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 100rem;
+    background-color: rgb(67, 82, 97);
+    transition: all 0.2s ease 0s;
+}
+
+.bMyBW {
+    display: block;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    transition: all 0.2s ease 0s;
+    left: 0px;
+    top: 0px;
+    padding: 3px;
+}
+
+.bMyBW::before {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100rem;
+    background-color: rgb(255, 255, 255);
+}
+
+.dOBmKM {
+    margin-left: 8px;
+}
+
+.hmYvbx.hmYvbx {
+    width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.jreOdS.jreOdS {
+    margin-right: 16px;
+    padding: 0px;
+}
+
+.cUdOut .styledes__ButtonText-sc-ef8j7g-0 {
+    display: flex;
+    transition: opacity 300ms ease-in-out 0s;
+    opacity: 1;
+}
+
+.dUwAOv.dUwAOv {
+    width: 24px;
+    height: 24px;
+}
+
+.jCTFJc.jCTFJc {
+    width: 100%;
+    height: 25px;
+}
+
+.gpltBn.gpltBn {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.eKmJUC.eKmJUC {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0px;
+}
+
+.fKYaIX.fKYaIX {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.jWlmwe {
+    position: absolute;
+    left: 0px;
+    width: 392px;
+    height: 25px;
+}
+
+
+/* Start the player */
+
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+* {
+    box-sizing: border-box;
+}
+
+
+/* body {
+    background-image: linear-gradient( 0deg, rgba(247, 247, 247, 1) 23.8%, rgba(252, 221, 221, 1) 92%);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+} */
+
+.music-container {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 10px 0 rgba(252, 169, 169, 0.6);
+    /* display: flex; */
+    padding: 20px 30px;
+    position: relative;
+    margin: 0px;
+    z-index: 10;
+}
+
+.img-container {
+    position: relative;
+    width: 50px;
+    margin-right: 20px;
+}
+
+.img-container::after {
+    content: '';
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translate(-50%, 50%);
+}
+
+.img-container img {
+    border-radius: 50%;
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: rotate 3s linear infinite;
+    animation-play-state: paused;
+}
+
+.music-container.play .img-container img {
+    animation-play-state: running;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.action-btn {
+    background-color: #fff;
+    width: 50px;
+    border-radius: 4px;
+    border: 0;
+    color: #dfdbdf;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0;
+}
+
+.action-btn.action-btn-big {
+    color: #cdc2d0;
+    font-size: 30px;
+}
+
+.action-btn:focus {
+    outline: 0;
+}
+
+.music-info {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 15px 15px 0 0;
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    width: calc(100% - 40px);
+    padding: 10px 0px 10px 150px;
+    opacity: 1;
+    /* transform: translateY(-100%); */
+    /* transition: transform 0.3s ease-in, opacity 0.3s ease-in; */
+    z-index: 0;
+}
+
+
+/* .music-container.play .music-info {
+    opacity: 1;
+    transform: translateY(-100%);
+} */
+
+.music-info h4 {
+    margin: 0;
+}
+
+.progress-container {
+    background: #000;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+    height: 4px;
+    width: 100%;
+}
+
+.progress {
+    background-color: #fe8daa;
+    border-radius: 5px;
+    height: 100%;
+    width: 0%;
+    transition: width 0.1s linear;
+}

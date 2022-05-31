@@ -53,8 +53,8 @@ class Slate_Wpap_Admin {
 		$this->version = $version;
 
 		$this->admin_load_dependencies();
-		if ( class_exists( 'Custom_wpap_Admin_Display' ) ) {
-			new Custom_wpap_Admin_Display();
+		if ( class_exists( 'Custom_Wpap_Admin_Display' ) ) {
+			new Custom_Wpap_Admin_Display();
 		}
 	}
 
@@ -115,7 +115,6 @@ class Slate_Wpap_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/slate-wpap-admin.js', array( 'jquery' ), $this->version, false );
 
 		wp_enqueue_script( 'inewsletter-template', plugin_dir_url( __FILE__ ) . 'js/slate-wpap-template-insert.js', array( 'jquery' ), $this->version, false );
 		$ajax_nonce = wp_create_nonce( 'ntter_template' );
@@ -171,10 +170,10 @@ class Slate_Wpap_Admin {
 				);
 
 
-
-
 		wp_enqueue_media();
 		wp_enqueue_script( 'cmb-media', plugin_dir_url( __FILE__ ) . 'js/state-wpap-media.js', array( 'jquery' ), $this->version, true );
+
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/slate-wpap-admin.js', array( 'jquery' ), $this->version, true );
 
 	}
 

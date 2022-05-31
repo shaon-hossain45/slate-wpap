@@ -72,7 +72,7 @@ class Custom_List_Table_Template extends WP_List_Table {
 		);
 		$actions           = array(
 			'edit'   => sprintf( '<a href="?page=templates&action=edit&id=%s">%s</a>', $item['ID'], __( 'Edit', 'cltd_example' ) ),
-			'delete' => sprintf( '<a href="%1$s">%2$s</a>', esc_url( wp_nonce_url( add_query_arg( $delete_query_args, 'admin.php' ), 'deletewpaptemplate' ) ), _x( 'Delete', 'List table row action', 'wp-list-table-example' ) ),
+			'delete' => sprintf( '<a href="%1$s">%2$s</a>', esc_url( wp_nonce_url( add_query_arg( $delete_query_args, 'admin.php' ), 'deletetemplate' ) ), _x( 'Delete', 'List table row action', 'wp-list-table-example' ) ),
 		);
 
 		return sprintf(
@@ -107,7 +107,7 @@ class Custom_List_Table_Template extends WP_List_Table {
 			'cb'               => '<input type="checkbox" />', // Render a checkbox instead of text
 			'template_title'  => __( 'Template Title', 'cltd_example' ),
 			'template_description' => __( 'Template Description', 'cltd_example' ),
-			'template_shortcode' => __( 'Template Shortcode', 'cltd_example' ),
+			// 'template_shortcode' => __( 'Template Shortcode', 'cltd_example' ),
 		);
 		return $columns;
 	}
@@ -155,9 +155,9 @@ class Custom_List_Table_Template extends WP_List_Table {
 		$table_name = $wpdb->prefix . 'wpaptemplates';
 
 		if ( $data == 1 ) {
-			$results = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE verified = %d", 1 ) );
+			$results = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE template_title = %d", 1 ) );
 		} elseif ( $data == 2 ) {
-			$results = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE register = %d", 1 ) );
+			$results = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE template_description = %d", 1 ) );
 		} else {
 			$results = $wpdb->get_var( "SELECT count(*) FROM $table_name" );
 		}
@@ -183,7 +183,7 @@ class Custom_List_Table_Template extends WP_List_Table {
 			'template_description' => array(
 				'name'      => __( 'Template Description', 'cltd_example' ),
 				'status_id' => 2,
-			),
+			)
 		);
 		foreach ( $views_item as $k => $v ) {
 			$custom_url  = add_query_arg( 'filter', $k, remove_query_arg( array( 's', 'paged', 'alert' ) ) );
@@ -202,7 +202,7 @@ class Custom_List_Table_Template extends WP_List_Table {
 	function get_bulk_actions() {
 		$actions = array(
 			'bulk-delete'         => 'Delete',
-			'bulk-edit' => 'Edit',
+			//'bulk-edit' => 'Edit',
 		);
 		return $actions;
 	}
@@ -219,12 +219,12 @@ class Custom_List_Table_Template extends WP_List_Table {
 			// In our file that handles the request, verify the nonce.
 			$nonce = esc_attr( $_REQUEST['_wpnonce'] );
 
-			if ( ! wp_verify_nonce( $nonce, 'deletewpaptemplate' ) ) {
+			if ( ! wp_verify_nonce( $nonce, 'deletetemplate' ) ) {
 				die( 'Go get a life script kiddies' );
 			} else {
 				self::itechpublic_delete_activity( absint( $_REQUEST['id'] ) );
-
-				add_flash_notice( __( '1 wpaptemplate item permanently deleted.' ), 'success', true );
+				
+				add_flash_notice( __( '1 wpap template item permanently deleted.' ), 'success', true );
 				$redirect_to = admin_url( 'admin.php?page=templates&deleted=true' );
 				wp_redirect( $redirect_to );
 				exit;
@@ -330,11 +330,11 @@ class Custom_List_Table_Template extends WP_List_Table {
 		// [REQUIRED] define $items array
 		// notice that last argument is ARRAY_A, so we will retrieve array
 		if ( isset( $_GET['filter'] ) && ( $_GET['filter'] == 'template_title' ) ) {
-			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE verified= %d ORDER BY $orderby $order LIMIT %d OFFSET %d", 1, $per_page, $paged ), ARRAY_A );
-			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE verified = %d", 1 ) );
+			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE template_title= %d ORDER BY $orderby $order LIMIT %d OFFSET %d", 1, $per_page, $paged ), ARRAY_A );
+			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE template_title = %d", 1 ) );
 		} elseif ( isset( $_GET['filter'] ) && ( $_GET['filter'] == 'template_description' ) ) {
-			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE register= %d ORDER BY $orderby $order LIMIT %d OFFSET %d", 1, $per_page, $paged ), ARRAY_A );
-			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE register = %d", 1 ) );
+			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE template_description= %d ORDER BY $orderby $order LIMIT %d OFFSET %d", 1, $per_page, $paged ), ARRAY_A );
+			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE template_description = %d", 1 ) );
 		} else {
 			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name ORDER BY $orderby $order LIMIT %d OFFSET %d", $per_page, $paged ), ARRAY_A );
 			$total_items = $wpdb->get_var( "SELECT COUNT(id) FROM $table_name" );

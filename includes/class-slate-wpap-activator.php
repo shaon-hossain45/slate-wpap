@@ -60,7 +60,8 @@ class Slate_Wpap_Activator {
 		$schema = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}wpaptemplates` (
           `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		  `template_title` varchar(500) NOT NULL,
-		  `template_description` varchar(5000) NOT NULL
+		  `template_description` varchar(5000) NOT NULL,
+		  `template_shortcode` varchar(100) NOT NULL
         ) $charset_collate";
 
 
@@ -70,7 +71,7 @@ class Slate_Wpap_Activator {
 			`audio_description` varchar(5000) NOT NULL,
 			`audio_prounpro` varchar(100) NOT NULL,
 			`audio_preset` varchar(100) NOT NULL,
-			`template` varchar(100) NOT NULL,
+			`template` int(11) NOT NULL,
 			`audio_file` varchar(10000) NOT NULL
 		) $charset_collate";
 

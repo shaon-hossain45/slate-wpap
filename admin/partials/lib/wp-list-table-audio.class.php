@@ -156,9 +156,9 @@ class Custom_List_Table_Audio extends WP_List_Table {
 		$table_name = $wpdb->prefix . 'wpapaudios';
 
 		if ( $data == 1 ) {
-			$results = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE verified = %d", 1 ) );
+			$results = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE audio_name = %d", 1 ) );
 		} elseif ( $data == 2 ) {
-			$results = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE register = %d", 1 ) );
+			$results = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE audio_description = %d", 1 ) );
 		} else {
 			$results = $wpdb->get_var( "SELECT count(*) FROM $table_name" );
 		}
@@ -203,7 +203,7 @@ class Custom_List_Table_Audio extends WP_List_Table {
 	function get_bulk_actions() {
 		$actions = array(
 			'bulk-delete'         => 'Delete',
-			'bulk-edit' => 'Edit',
+			//'bulk-edit' => 'Edit',
 		);
 		return $actions;
 	}
@@ -330,12 +330,12 @@ class Custom_List_Table_Audio extends WP_List_Table {
 
 		// [REQUIRED] define $items array
 		// notice that last argument is ARRAY_A, so we will retrieve array
-		if ( isset( $_GET['filter'] ) && ( $_GET['filter'] == 'verified' ) ) {
-			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE verified= %d ORDER BY $orderby $order LIMIT %d OFFSET %d", 1, $per_page, $paged ), ARRAY_A );
-			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE verified = %d", 1 ) );
-		} elseif ( isset( $_GET['filter'] ) && ( $_GET['filter'] == 'register' ) ) {
-			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE register= %d ORDER BY $orderby $order LIMIT %d OFFSET %d", 1, $per_page, $paged ), ARRAY_A );
-			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE register = %d", 1 ) );
+		if ( isset( $_GET['filter'] ) && ( $_GET['filter'] == 'audio_name' ) ) {
+			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE audio_name= %d ORDER BY $orderby $order LIMIT %d OFFSET %d", 1, $per_page, $paged ), ARRAY_A );
+			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE audio_name = %d", 1 ) );
+		} elseif ( isset( $_GET['filter'] ) && ( $_GET['filter'] == 'audio_description' ) ) {
+			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE audio_description= %d ORDER BY $orderby $order LIMIT %d OFFSET %d", 1, $per_page, $paged ), ARRAY_A );
+			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE audio_description = %d", 1 ) );
 		} else {
 			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name ORDER BY $orderby $order LIMIT %d OFFSET %d", $per_page, $paged ), ARRAY_A );
 			$total_items = $wpdb->get_var( "SELECT COUNT(id) FROM $table_name" );

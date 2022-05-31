@@ -10,6 +10,7 @@
  * @subpackage Slate_Wpap/admin/views
  */
 ?>
+
 <div class="wrap">
 	<div class="icon32 icon32-posts-post" id="icon-edit"><br></div>
 	<!-- add new button remove from here -->

@@ -80,7 +80,7 @@ if ( ! class_exists( 'MenuSetup' ) ) {
 				'Shortcodes',
 				'manage_options',
 				'shortcodes',
-				array( $this->functional, 'slate_wpap_sub_menu_page_____' ),
+				array( $this->functional, 'slate_wpap_sub_menu_page_shortcode' ),
 			);
 		}
 

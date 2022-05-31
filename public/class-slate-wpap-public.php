@@ -52,6 +52,26 @@ class Slate_Wpap_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		$this->public_load_dependencies();
+		if ( class_exists( 'PublicBaseSetup' ) ) {
+			new PublicBaseSetup();
+		}
+
+	}
+
+	/**
+	 * Directory path called
+	 *
+	 * @since    1.0.0
+	 * @param      string    $plugin_name       The name of this plugin.
+	 * @param      string    $version    The version of this plugin.
+	 */
+	private function public_load_dependencies() {
+		/**
+		 * The class responsible for orchestrating the actions and filters of the
+		 * core plugin.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/partials/slate-wpap-public-display.php';
 	}
 
 	/**
@@ -73,7 +93,10 @@ class Slate_Wpap_Public {
 		 * class.
 		 */
 
+		wp_enqueue_style( 'cdnjs-cloudflare-font', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css', 'array()', '6.1.1', 'all' );
+
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/slate-wpap-public.css', array(), $this->version, 'all' );
+
 
 	}
 
@@ -96,7 +119,8 @@ class Slate_Wpap_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/slate-wpap-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'wavesurfer', 'https://unpkg.com/wavesurfer.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/slate-wpap-public.js', array( 'jquery' ), $this->version, true );
 
 	}
 
