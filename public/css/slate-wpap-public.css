@@ -279,28 +279,36 @@
 
 .music-container {
     width: 100%;
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 10px 10px 0 rgba(252, 169, 169, 0.6);
+    background-color: #333333;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.6);
     /* display: flex; */
     padding: 20px 30px;
     position: relative;
-    margin: 0px;
+    padding-left: 50px;
     z-index: 10;
 }
 
 .img-container {
-    position: relative;
-    width: 50px;
-    margin-right: 20px;
+    position: absolute;
+    left: 25px;
+    top: -25px;
+    height: 45px;
+    justify-content: center;
+    align-items: center;
 }
 
-.img-container::after {
+.img-container .imginner {
+    position: relative;
+    width: 45px;
+}
+
+.img-container .imginner::after {
     content: '';
     background-color: #fff;
     border-radius: 50%;
     position: absolute;
-    bottom: 25px;
+    top: 3px;
     left: 50%;
     width: 20px;
     height: 20px;
@@ -310,10 +318,10 @@
 .img-container img {
     border-radius: 50%;
     object-fit: cover;
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width: 45px;
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     animation: rotate 3s linear infinite;
     animation-play-state: paused;
@@ -335,25 +343,43 @@
 .navigation {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     z-index: 1;
+    top: 4px;
+    position: relative;
 }
 
 .action-btn {
+    display: flex;
     background-color: #fff;
-    width: 50px;
     border-radius: 4px;
     border: 0;
     color: #dfdbdf;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
     padding: 10px;
-    margin: 0;
+    margin-left: 70px;
+}
+
+.action-btn i:first-child {
+    margin-right: 10px;
+    position: relative;
+}
+
+.action-btn i:first-child::after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 17px;
+    width: 1px;
+    height: 30px;
+    background-color: #fff;
 }
 
 .action-btn.action-btn-big {
     color: #cdc2d0;
-    font-size: 30px;
+    font-size: 18px;
+    background-color: #3a3a3a;
 }
 
 .action-btn:focus {
@@ -361,13 +387,12 @@
 }
 
 .music-info {
-    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 15px 15px 0 0;
-    position: absolute;
-    top: 0px;
-    left: 20px;
-    width: calc(100% - 40px);
-    padding: 10px 0px 10px 150px;
+    position: relative;
+    /* top: 10px;
+    left: 160px; */
+    width: 100%;
+    padding: 10px 0px 10px 0px;
     opacity: 1;
     /* transform: translateY(-100%); */
     /* transition: transform 0.3s ease-in, opacity 0.3s ease-in; */
@@ -399,4 +424,8 @@
     height: 100%;
     width: 0%;
     transition: width 0.1s linear;
+}
+
+wave {
+    height: 45px !important;
 }

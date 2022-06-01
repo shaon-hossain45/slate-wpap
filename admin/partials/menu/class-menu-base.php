@@ -379,8 +379,8 @@ public function template_update_setting(){
 														<label for="content"><?php _e( 'Preset', 'slatewpap-template' ); ?></label>
 													</th>
 													<td>
-														<select id="audio_preset" name="audio_preset">
-														<option value="" selected>Select Preset</option>
+														<select id="audio_preset" name="audio_preset" disabled>
+														<option value="0" selected>Select Preset</option>
 															<option value="1">1</option>
 															<option value="2">2</option>
 															<option value="3">3</option>
@@ -454,6 +454,12 @@ public function template_update_setting(){
 		// String to array
 		parse_str( $_POST['value'], $itechArray );
 
+		if(empty($itechArray['audio_preset'])){
+			$audio_preset = "0";
+		}else{
+			$audio_preset = $itechArray['audio_preset'];
+		}
+
 		// combine our default item with request params
 		// Collect data from - form request array
 			$items = array(
@@ -461,7 +467,7 @@ public function template_update_setting(){
 				'audio_name'  => $itechArray['audio_title'],
 				'audio_description' => $itechArray['audio_description'],
 				'audio_prounpro' => $itechArray['audio_proorunpro'],
-				'audio_preset' => $itechArray['audio_preset'],
+				'audio_preset' => $audio_preset,
 				'template' => $itechArray['audio_template'],
 				'audio_file' => $itechArray['prefix_custom_options']
 			);
@@ -509,6 +515,11 @@ public function template_update_setting(){
 		// String to array
 		parse_str( $_POST['value'], $itechArray );
 
+		if(empty($itechArray['audio_preset'])){
+			$audio_preset = "0";
+		}else{
+			$audio_preset = $itechArray['audio_preset'];
+		}
 		// combine our default item with request params
 		// Collect data from - form request array
 			$items = array(
@@ -516,7 +527,7 @@ public function template_update_setting(){
 				'audio_name'  => $itechArray['audio_title'],
 				'audio_description' => $itechArray['audio_description'],
 				'audio_prounpro' => $itechArray['audio_proorunpro'],
-				'audio_preset' => $itechArray['audio_preset'],
+				'audio_preset' => $audio_preset,
 				'template' => $itechArray['audio_template'],
 				'audio_file' => $itechArray['prefix_custom_options']
 			);
@@ -561,12 +572,12 @@ public function template_update_setting(){
 			$message = '';
 
 
-			if( isset( $_GET['template'] ) && ( $_GET['template'] == 'create' ) ){
-				$this->template_lister_create();
+			if( isset( $_GET['shortcode'] ) && ( $_GET['shortcode'] == 'create' ) ){
+				$this->shortcode_lister_create();
 			}else if( isset( $_GET['action'] ) && ( $_GET['action'] == 'edit' ) ){
 				include plugin_dir_path( dirname( __FILE__ ) ) . '../views/template-update-page.php';
 			}else{
-				include_once plugin_dir_path( dirname( __FILE__ ) ) . '../views/template-page.php';
+				include_once plugin_dir_path( dirname( __FILE__ ) ) . '../views/shortcode-page.php';
 			}
 		}
 

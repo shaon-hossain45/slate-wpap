@@ -110,8 +110,9 @@
         function editorSelect2Valid() {
             isAudioSelect2Valid = true;
             var editorselect = $("#audio_preset option:selected");
+            var dependableselectval = $("#audio_proorunpro option:selected").val();
             var editorselectval = editorselect.val();
-            if (editorselectval == "") {
+            if (editorselectval == "0" && dependableselectval == "processed") {
                 isAudioSelectValid = false;
                 $("#audio_preset").addClass("error");
             } else {

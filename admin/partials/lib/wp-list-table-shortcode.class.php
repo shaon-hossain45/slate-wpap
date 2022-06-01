@@ -63,24 +63,24 @@ class Custom_List_Table_Shortcode extends WP_List_Table {
 	 * @param $item - row (key, value array)
 	 * @return HTML
 	 */
-	function column_template_title( $item ) {
-		// Build delete row action.
-		$delete_query_args = array(
-			'page'   => 'templates',
-			'action' => 'delete',
-			'id'     => $item['ID'],
-		);
-		$actions           = array(
-			'edit'   => sprintf( '<a href="?page=templates&action=edit&id=%s">%s</a>', $item['ID'], __( 'Edit', 'cltd_example' ) ),
-			'delete' => sprintf( '<a href="%1$s">%2$s</a>', esc_url( wp_nonce_url( add_query_arg( $delete_query_args, 'admin.php' ), 'deletetemplate' ) ), _x( 'Delete', 'List table row action', 'wp-list-table-example' ) ),
-		);
+	// function column_template_title( $item ) {
+	// 	// Build delete row action.
+	// 	$delete_query_args = array(
+	// 		'page'   => 'templates',
+	// 		'action' => 'delete',
+	// 		'id'     => $item['ID'],
+	// 	);
+	// 	$actions           = array(
+	// 		'edit'   => sprintf( '<a href="?page=shortcodes&action=edit&id=%s">%s</a>', $item['ID'], __( 'Edit', 'cltd_example' ) ),
+	// 		'delete' => sprintf( '<a href="%1$s">%2$s</a>', esc_url( wp_nonce_url( add_query_arg( $delete_query_args, 'admin.php' ), 'deletetemplate' ) ), _x( 'Delete', 'List table row action', 'wp-list-table-example' ) ),
+	// 	);
 
-		return sprintf(
-			'%s %s',
-			$item['template_title'],
-			$this->row_actions( $actions )
-		);
-	}
+	// 	return sprintf(
+	// 		'%s %s',
+	// 		$item['template_title'],
+	// 		$this->row_actions( $actions )
+	// 	);
+	// }
 
 	/**
 	 * [REQUIRED] this is how checkbox column renders
@@ -105,9 +105,9 @@ class Custom_List_Table_Shortcode extends WP_List_Table {
 	function get_columns() {
 		$columns = array(
 			'cb'               => '<input type="checkbox" />', // Render a checkbox instead of text
-			'template_title'  => __( 'Template Title', 'cltd_example' ),
+			'template_title'  => __( 'Shortcode Title', 'cltd_example' ),
 			//'template_description' => __( 'Template Description', 'cltd_example' ),
-			'template_shortcode' => __( 'Template Shortcode', 'cltd_example' ),
+			'template_shortcode' => __( 'Shortcode Structure', 'cltd_example' ),
 		);
 		return $columns;
 	}
@@ -177,11 +177,11 @@ class Custom_List_Table_Shortcode extends WP_List_Table {
 		$views['all'] = "<a href='{$all_url }' {$class} >" . __( 'All', 'cltd_example' ) . ' <span class="count">(' . number_format( $this->itechpublic_get_filter_count() ) . ')</span></a>';
 		$views_item   = array(
 			'template_title' => array(
-				'name'      => __( 'Template Title', 'cltd_example' ),
+				'name'      => __( 'Shortcode Title', 'cltd_example' ),
 				'status_id' => 1,
 			),
 			'template_shortcode' => array(
-				'name'      => __( 'Template Shortcode', 'cltd_example' ),
+				'name'      => __( 'Shortcode Structure', 'cltd_example' ),
 				'status_id' => 2,
 			)
 		);
@@ -201,7 +201,7 @@ class Custom_List_Table_Shortcode extends WP_List_Table {
 	 */
 	function get_bulk_actions() {
 		$actions = array(
-			'bulk-delete'         => 'Delete',
+			// 'bulk-delete'         => 'Delete',
 			//'bulk-edit' => 'Edit',
 		);
 		return $actions;
@@ -247,12 +247,12 @@ class Custom_List_Table_Shortcode extends WP_List_Table {
 					$counter = $counter . ' wpaptemplate item';
 				}
 				add_flash_notice( __( $counter . ' permanently deleted.' ), 'success', true );
-				$redirect_to = admin_url( 'admin.php?page=templates&deleted=true' );
+				$redirect_to = admin_url( 'admin.php?page=shortcodes&deleted=true' );
 				wp_redirect( $redirect_to );
 				exit;
 			} else {
 				add_flash_notice( __( 'Something wrong.' ), 'error', true );
-				$redirect_to = admin_url( 'admin.php?page=templates&deleted=false' );
+				$redirect_to = admin_url( 'admin.php?page=shortcodes&deleted=false' );
 				wp_redirect( $redirect_to );
 				exit;
 			}
@@ -341,8 +341,8 @@ class Custom_List_Table_Shortcode extends WP_List_Table {
 		}
 
 		if ( $user_search_key ) {
-			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE template_title LIKE %s OR template_email LIKE %s", $wpdb->esc_like( $user_search_key ), $wpdb->esc_like( $user_search_key ) ), ARRAY_A );
-			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE template_title LIKE %s OR template_email LIKE %s", $wpdb->esc_like( $user_search_key ), $wpdb->esc_like( $user_search_key ) ) );
+			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE template_title LIKE %s OR template_shortcode LIKE %s", $wpdb->esc_like( $user_search_key ), $wpdb->esc_like( $user_search_key ) ), ARRAY_A );
+			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE template_title LIKE %s OR template_shortcode LIKE %s", $wpdb->esc_like( $user_search_key ), $wpdb->esc_like( $user_search_key ) ) );
 		}
 
 		// [REQUIRED] configure pagination

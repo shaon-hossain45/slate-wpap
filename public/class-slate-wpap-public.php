@@ -119,7 +119,7 @@ class Slate_Wpap_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( 'wavesurfer', 'https://unpkg.com/wavesurfer.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script( 'wavesurfer', 'https://unpkg.com/wavesurfer.js', array( 'jquery' ), $this->version, false );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/slate-wpap-public.js', array( 'jquery' ), $this->version, true );
 
 	}

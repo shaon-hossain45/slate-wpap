@@ -341,8 +341,8 @@ class Custom_List_Table_Template extends WP_List_Table {
 		}
 
 		if ( $user_search_key ) {
-			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE template_title LIKE %s OR template_email LIKE %s", $wpdb->esc_like( $user_search_key ), $wpdb->esc_like( $user_search_key ) ), ARRAY_A );
-			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE template_title LIKE %s OR template_email LIKE %s", $wpdb->esc_like( $user_search_key ), $wpdb->esc_like( $user_search_key ) ) );
+			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name WHERE template_title LIKE %s OR template_description LIKE %s", $wpdb->esc_like( $user_search_key ), $wpdb->esc_like( $user_search_key ) ), ARRAY_A );
+			$total_items = $wpdb->get_var( $wpdb->prepare( "SELECT count(*) FROM $table_name WHERE template_title LIKE %s OR template_description LIKE %s", $wpdb->esc_like( $user_search_key ), $wpdb->esc_like( $user_search_key ) ) );
 		}
 
 		// [REQUIRED] configure pagination

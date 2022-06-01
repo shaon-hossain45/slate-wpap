@@ -111,7 +111,7 @@
             isAudioSelect2Valid = true;
             var editorselect = $("#audio_preset option:selected");
             var editorselectval = editorselect.val();
-            if (editorselectval == "") {
+            if (editorselectval == "0") {
                 isAudioSelectValid = false;
                 $("#audio_preset").addClass("error");
             } else {

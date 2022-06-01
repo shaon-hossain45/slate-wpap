@@ -29,4 +29,21 @@
      * practising this, we should strive to set a better example in our own work.
      */
 
+    /**
+     * Dependable select type
+     * @param  {[type]}   [description]
+     * @return {[type]}   [description]
+     */
+    $(function() {
+        $("select#audio_proorunpro").change(function() {
+            var thisby = $(this);
+            var selected = thisby.children("option:selected").val();
+            if (selected == "processed") {
+                thisby.closest('table').find("select#audio_preset").removeAttr("disabled");
+            } else {
+                thisby.closest('table').find("select#audio_preset").prop("disabled", true);
+            }
+        }).trigger("change");
+    });
+
 })(jQuery);

@@ -53,7 +53,7 @@ if ( ! class_exists( 'PublicBaseSetup' ) ) {
 		// Output
 		$output = '';
 
-		$output .='<div id="'.$item['ID'].'" width="100%" class="Boxes__Box-sc-c98zp8-0 goJgHx">
+		$output .='<div template_id="'.$atts['label'].'" id="'.$item['ID'].'" width="100%" class="Boxes__Box-sc-c98zp8-0 goJgHx">
 <div display="flex" class="Boxes__Box-sc-c98zp8-0 sc-caiLqq cTsXBC enePwt">
 	<h2 font-weight="bold" class="Boxes__Box-sc-c98zp8-0 Textes__Text-sc-hv6g11-0 Headinges__Heading-sc-2igbz0-0 cijqyD dnFFqQ fueCpv">Hip-Hop</h2>
 	<div direction="horizontal" class="Boxes__Box-sc-c98zp8-0 styledes__ChipGroup-sc-14zo81j-0 kjMWjy pzTSG">
@@ -69,23 +69,17 @@ if ( ! class_exists( 'PublicBaseSetup' ) ) {
 	<div class="Boxes__Box-sc-c98zp8-0 dTIbbW"><span font-weight="bold" class="Boxes__Box-sc-c98zp8-0 Textes__Text-sc-hv6g11-0 kXTa-dH klUNet">Hi-Fi</span><p class="Boxes__Box-sc-c98zp8-0 Textes__Text-sc-hv6g11-0 Paragraphes__Paragraph-sc-tg8lrm-0 hOMQsu pGoms Vhpvz">Modern and detailed, cutting without harshness.</p></div>
 	<div width="100%" display="flex" class="Boxes__Box-sc-c98zp8-0 hmYvbx">
 <div class="music-container" id="music-container">
-<div id="waveform" style="margin-left: 45px;"></div>
-  <div class="music-info">
-    <h4 id="title"></h4>
-    <div class="progress-container" id="progress-container">
-      <div class="progress" id="progress"></div>
-    </div>
-  </div>
-
   <audio src="'. $item['audio_file'] .'" id="audio"></audio>
 
   <div class="img-container">
-    <img src="'. plugin_dir_url( dirname( __FILE__ ) ) . 'images/summer.jpg" alt="music-cover" id="cover" />
+    <div class="imginner"><img src="'. plugin_dir_url( dirname( __FILE__ ) ) . 'images/summer.jpg" alt="music-cover" id="cover" /></div>
+	<div class="navigation">
+    <button class="action-btn action-btn-big" id="playpause"><i class="fa fa-play"></i><i class="fa fa-pause"></i></button>
   </div>
-  <div class="navigation">
-    <button id="play" class="action-btn action-btn-big">
-      <i class="fas fa-play"></i>
-    </button>
+  </div>
+
+  <div class="music-info">
+  <div id="waveform"></div>
   </div>
 </div>
     </div>
