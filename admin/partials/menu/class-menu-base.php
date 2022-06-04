@@ -364,31 +364,6 @@ public function template_update_setting(){
 												</tr>
 												<tr class="form-field">
 													<th valign="top" scope="row">
-														<label for="content"><?php _e( 'Processed / Unprocessed', 'slatewpap-template' ); ?></label>
-													</th>
-													<td>
-														<select id="audio_proorunpro" name="audio_proorunpro">
-														<option value="" selected>Select Type</option>
-															<option value="processed">Processed</option>
-															<option value="unprocessed">Unprocessed</option>
-														</select>
-													</td>
-												</tr>
-												<tr class="form-field">
-													<th valign="top" scope="row">
-														<label for="content"><?php _e( 'Preset', 'slatewpap-template' ); ?></label>
-													</th>
-													<td>
-														<select id="audio_preset" name="audio_preset" disabled>
-														<option value="0" selected>Select Preset</option>
-															<option value="1">1</option>
-															<option value="2">2</option>
-															<option value="3">3</option>
-														</select>
-													</td>
-												</tr>
-												<tr class="form-field">
-													<th valign="top" scope="row">
 														<label for="content"><?php _e( 'Select Template', 'slatewpap-template' ); ?></label>
 													</th>
 													<td>
@@ -410,6 +385,67 @@ public function template_update_setting(){
 													</td>
 												</tr>
 												<tr class="form-field">
+													<th valign="top" scope="row">
+														<label for="content"><?php _e( 'Processed / Unprocessed', 'slatewpap-template' ); ?></label>
+													</th>
+													<td>
+														<select id="audio_proorunpro" name="audio_proorunpro">
+														<option value="" selected>Select Type</option>
+															<option value="processed">Processed</option>
+															<option value="unprocessed">Unprocessed</option>
+														</select>
+													</td>
+												</tr>
+												<tr class="form-field">
+													<th valign="top" scope="row">
+														<label for="content"><?php _e( 'Preset', 'slatewpap-template' ); ?></label>
+													</th>
+													<td>
+														<select id="audio_preset" name="audio_preset" disabled>
+														<option value="0" selected>Select Preset</option>
+															<option value="p1">1</option>
+															<option value="p2">2</option>
+															<option value="p3">3</option>
+														</select>
+													</td>
+												</tr>
+												<tr class="form-field p123 hidden" data-pid="p1">
+													<th valign="top" scope="row">
+														<label for="content"><?php _e( 'Audio File Upload Preset 1', 'slatewpap-template' ); ?></label>
+													</th>
+													<td>
+														<div class="csf-placeholder">
+															<input type="text" name="prefix_custom_options1" id="meta-image1" value="" class="csf--url" readonly="readonly" data-depend-id="opt-media-1" placeholder="Not selected" style="width: 25%;">
+															<a class="button button-primary csf--button" data-library="" data-preview-size="thumbnail">Upload</a>
+															<a class="button button-secondary csf-warning-primary csf--remove hidden">Remove</a>
+														</div>
+													</td>
+												</tr>
+												<tr class="form-field p123 hidden" data-pid="p2">
+													<th valign="top" scope="row">
+														<label for="content"><?php _e( 'Audio File Upload Preset 2', 'slatewpap-template' ); ?></label>
+													</th>
+													<td>
+														<div class="csf-placeholder">
+															<input type="text" name="prefix_custom_options2" id="meta-image2" value="" class="csf--url" readonly="readonly" data-depend-id="opt-media-1" placeholder="Not selected" style="width: 25%;">
+															<a class="button button-primary csf--button" data-library="" data-preview-size="thumbnail">Upload</a>
+															<a class="button button-secondary csf-warning-primary csf--remove hidden">Remove</a>
+														</div>
+													</td>
+												</tr>
+												<tr class="form-field p123 hidden" data-pid="p3">
+													<th valign="top" scope="row">
+														<label for="content"><?php _e( 'Audio File Upload Preset 3', 'slatewpap-template' ); ?></label>
+													</th>
+													<td>
+														<div class="csf-placeholder">
+															<input type="text" name="prefix_custom_options3" id="meta-image3" value="" class="csf--url" readonly="readonly" data-depend-id="opt-media-1" placeholder="Not selected" style="width: 25%;">
+															<a class="button button-primary csf--button" data-library="" data-preview-size="thumbnail">Upload</a>
+															<a class="button button-secondary csf-warning-primary csf--remove hidden">Remove</a>
+														</div>
+													</td>
+												</tr>
+												<tr class="form-field p1234 hidden">
 													<th valign="top" scope="row">
 														<label for="content"><?php _e( 'Audio File Upload', 'slatewpap-template' ); ?></label>
 													</th>
@@ -466,9 +502,12 @@ public function template_update_setting(){
 				//'ID'               => $itechArray['ID'],
 				'audio_name'  => $itechArray['audio_title'],
 				'audio_description' => $itechArray['audio_description'],
+				'template' => $itechArray['audio_template'],
 				'audio_prounpro' => $itechArray['audio_proorunpro'],
 				'audio_preset' => $audio_preset,
-				'template' => $itechArray['audio_template'],
+				'audio_filep1' => $itechArray['prefix_custom_options1'],
+				'audio_filep2' => $itechArray['prefix_custom_options2'],
+				'audio_filep3' => $itechArray['prefix_custom_options3'],
 				'audio_file' => $itechArray['prefix_custom_options']
 			);
 

@@ -72,7 +72,10 @@ class Slate_Wpap_Activator {
 			`audio_prounpro` varchar(100) NOT NULL,
 			`audio_preset` varchar(100) NOT NULL,
 			`template` int(11) NOT NULL,
-			`audio_file` varchar(10000) NOT NULL
+			`audio_filep1` varchar(1000) NOT NULL,
+			`audio_filep2` varchar(1000) NOT NULL,
+			`audio_filep3` varchar(1000) NOT NULL,
+			`audio_file` varchar(1000) NOT NULL
 		) $charset_collate";
 
 
