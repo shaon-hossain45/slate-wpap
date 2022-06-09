@@ -246,7 +246,8 @@
 
 
         var form = $(this);
-        if (isAudioDescriptionValid == true && isAudioNameValid == true && isAudioFileValid == true && isAudioSelectValid == true && isAudioSelect2Valid == true && isAudioSelect3Valid == true) {
+
+        if (isAudioDescriptionValid == true && isAudioNameValid == true && isAudioSelectValid == true && isAudioSelect3Valid == true && isAudioSelect2Valid == true) {
 
             /**
              * Data passing to the server with ajax

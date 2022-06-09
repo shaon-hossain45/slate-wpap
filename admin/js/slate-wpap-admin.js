@@ -40,9 +40,11 @@
             var selected = thisby.children("option:selected").val();
             if (selected == "processed") {
                 thisby.closest('table').find("select#audio_preset").removeAttr("disabled");
-                thisby.closest('table').find('select#audio_preset').prop('selectedIndex', 0);
+                thisby.closest('table').find("tr.p12").removeClass("hidden");
+                //thisby.closest('table').find('select#audio_preset').prop('selectedIndex', 0);
             } else {
                 thisby.closest('table').find("select#audio_preset").prop("disabled", true);
+                thisby.closest('table').find("tr.p12").addClass("hidden");
             }
 
             if (selected == "unprocessed") {

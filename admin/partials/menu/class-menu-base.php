@@ -396,7 +396,7 @@ public function template_update_setting(){
 														</select>
 													</td>
 												</tr>
-												<tr class="form-field">
+												<tr class="form-field p12 hidden">
 													<th valign="top" scope="row">
 														<label for="content"><?php _e( 'Preset', 'slatewpap-template' ); ?></label>
 													</th>
@@ -568,7 +568,10 @@ public function template_update_setting(){
 				'audio_prounpro' => $itechArray['audio_proorunpro'],
 				'audio_preset' => $audio_preset,
 				'template' => $itechArray['audio_template'],
-				'audio_file' => $itechArray['prefix_custom_options']
+				'audio_filep1' => $itechArray['prefix_custom_options1'],
+				'audio_filep2' => $itechArray['prefix_custom_options2'],
+				'audio_filep3' => $itechArray['prefix_custom_options3'],
+				'audio_file' => $itechArray['prefix_custom_options'],
 			);
 
 		// validate data, and if all ok save item to database

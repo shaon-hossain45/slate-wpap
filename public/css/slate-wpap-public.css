@@ -9,7 +9,7 @@
 .goJgHx {
     width: 100%;
     background-color: slategrey;
-    border-radius: 50px;
+    border-radius: 10px;
 }
 
 .cTsXBC.cTsXBC {
@@ -213,11 +213,11 @@
     padding: 3px;
 }
 
-.bMyBW.newjkl {
+.gxTSWG.newjkl .bMyBW {
     left: 24px;
 }
 
-.bMyBW.newjkl::before {
+.gxTSWG.newjkl .bMyBW::before {
     background-color: rgb(255, 255, 255);
 }
 
@@ -241,6 +241,10 @@
     align-items: center;
     margin-top: 24px;
     margin-bottom: 24px;
+}
+
+.hmYvbx.hmYvbx.hidden {
+    display: none;
 }
 
 .jreOdS.jreOdS {

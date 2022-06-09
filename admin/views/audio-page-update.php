@@ -48,6 +48,21 @@
                         } else {
                             $filepath = '';
                         }
+						if ( ! empty( $item['audio_filep1'] ) ) {
+                            $filepath1 = $item['audio_filep1'];
+                        } else {
+                            $filepath1 = '';
+                        }
+						if ( ! empty( $item['audio_filep2'] ) ) {
+                            $filepath2 = $item['audio_filep2'];
+                        } else {
+                            $filepath2 = '';
+                        }
+						if ( ! empty( $item['audio_filep3'] ) ) {
+                            $filepath3 = $item['audio_filep3'];
+                        } else {
+                            $filepath3 = '';
+                        }
 
 						if ( ! empty( $item['audio_prounpro'] ) ) {
                             $prounpro = $item['audio_prounpro'];
@@ -90,31 +105,6 @@
 									</tr>
 									<tr class="form-field">
 										<th valign="top" scope="row">
-											<label for="content"><?php _e( 'Processed / Unprocessed', 'slatewpap-template' ); ?></label>
-										</th>
-										<td>
-											<select id="audio_proorunpro" name="audio_proorunpro">
-											<option value="">Select Type</option>
-												<option value="processed" <?php if($prounpro == "processed"){ echo "selected";}; ?>>Processed</option>
-												<option value="unprocessed" <?php if($prounpro == "unprocessed"){ echo "selected";}; ?>>Unprocessed</option>
-											</select>
-										</td>
-									</tr>
-									<tr class="form-field">
-										<th valign="top" scope="row">
-											<label for="content"><?php _e( 'Preset', 'slatewpap-template' ); ?></label>
-										</th>
-										<td>
-											<select id="audio_preset" name="audio_preset">
-											<option value="">Select Preset</option>
-												<option value="1" <?php if($preset == "1"){ echo "selected";}; ?>>1</option>
-												<option value="2" <?php if($preset == "2"){ echo "selected";}; ?>>2</option>
-												<option value="3" <?php if($preset == "3"){ echo "selected";}; ?>>3</option>
-											</select>
-										</td>
-									</tr>
-									<tr class="form-field">
-										<th valign="top" scope="row">
 											<label for="content"><?php _e( 'Select Template', 'slatewpap-template' ); ?></label>
 										</th>
 										<td>
@@ -139,6 +129,67 @@
 										</td>
 									</tr>
 									<tr class="form-field">
+										<th valign="top" scope="row">
+											<label for="content"><?php _e( 'Processed / Unprocessed', 'slatewpap-template' ); ?></label>
+										</th>
+										<td>
+											<select id="audio_proorunpro" name="audio_proorunpro">
+											<option value="">Select Type</option>
+												<option value="processed" <?php if($prounpro == "processed"){ echo "selected";}; ?>>Processed</option>
+												<option value="unprocessed" <?php if($prounpro == "unprocessed"){ echo "selected";}; ?>>Unprocessed</option>
+											</select>
+										</td>
+									</tr>
+									<tr class="form-field p12 hidden">
+										<th valign="top" scope="row">
+											<label for="content"><?php _e( 'Preset', 'slatewpap-template' ); ?></label>
+										</th>
+										<td>
+											<select id="audio_preset" name="audio_preset">
+											<option value="0">Select Preset</option>
+												<option value="p1" <?php if($preset == "p1"){ echo "selected";}; ?>>1</option>
+												<option value="p2" <?php if($preset == "p2"){ echo "selected";}; ?>>2</option>
+												<option value="p3" <?php if($preset == "p3"){ echo "selected";}; ?>>3</option>
+											</select>
+										</td>
+									</tr>
+									<tr class="form-field p123 hidden" data-pid="p1">
+													<th valign="top" scope="row">
+														<label for="content"><?php _e( 'Audio File Upload Preset 1', 'slatewpap-template' ); ?></label>
+													</th>
+													<td>
+														<div class="csf-placeholder">
+															<input type="text" name="prefix_custom_options1" id="meta-image1" value="<?php echo esc_url($filepath1)?>" class="csf--url" readonly="readonly" data-depend-id="opt-media-1" placeholder="Not selected" style="width: 25%;">
+															<a class="button button-primary csf--button" data-library="" data-preview-size="thumbnail">Upload</a>
+															<a class="button button-secondary csf-warning-primary csf--remove hidden">Remove</a>
+														</div>
+													</td>
+												</tr>
+												<tr class="form-field p123 hidden" data-pid="p2">
+													<th valign="top" scope="row">
+														<label for="content"><?php _e( 'Audio File Upload Preset 2', 'slatewpap-template' ); ?></label>
+													</th>
+													<td>
+														<div class="csf-placeholder">
+															<input type="text" name="prefix_custom_options2" id="meta-image2" value="<?php echo esc_url($filepath2)?>" class="csf--url" readonly="readonly" data-depend-id="opt-media-1" placeholder="Not selected" style="width: 25%;">
+															<a class="button button-primary csf--button" data-library="" data-preview-size="thumbnail">Upload</a>
+															<a class="button button-secondary csf-warning-primary csf--remove hidden">Remove</a>
+														</div>
+													</td>
+												</tr>
+												<tr class="form-field p123 hidden" data-pid="p3">
+													<th valign="top" scope="row">
+														<label for="content"><?php _e( 'Audio File Upload Preset 3', 'slatewpap-template' ); ?></label>
+													</th>
+													<td>
+														<div class="csf-placeholder">
+															<input type="text" name="prefix_custom_options3" id="meta-image3" value="<?php echo esc_url($filepath3)?>" class="csf--url" readonly="readonly" data-depend-id="opt-media-1" placeholder="Not selected" style="width: 25%;">
+															<a class="button button-primary csf--button" data-library="" data-preview-size="thumbnail">Upload</a>
+															<a class="button button-secondary csf-warning-primary csf--remove hidden">Remove</a>
+														</div>
+													</td>
+												</tr>
+									<tr class="form-field p1234 hidden">
 										<th valign="top" scope="row">
 											<label for="content"><?php _e( 'Audio File Upload', 'slatewpap-template' ); ?></label>
 										</th>

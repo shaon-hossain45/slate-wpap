@@ -34,6 +34,9 @@
     var isAudioSelectValid = true;
     var isAudioSelect2Valid = true;
     var isAudioSelect3Valid = true;
+    var isAudioFileValid1 = true;
+    var isAudioFileValid2 = true;
+    var isAudioFileValid3 = true;
     var isAudioFileValid = true;
 
     /**
@@ -110,8 +113,9 @@
         function editorSelect2Valid() {
             isAudioSelect2Valid = true;
             var editorselect = $("#audio_preset option:selected");
+            var dependableselectval = $("#audio_proorunpro option:selected").val();
             var editorselectval = editorselect.val();
-            if (editorselectval == "0") {
+            if (editorselectval == "0" && dependableselectval == "processed") {
                 isAudioSelectValid = false;
                 $("#audio_preset").addClass("error");
             } else {
@@ -138,6 +142,87 @@
             }
         }
 
+        /**
+         * Newsletter description validation
+         * @return {[type]} [description]
+         */
+        editorfileValid1();
+
+        function editorfileValid1() {
+            isAudioFileValid1 = true;
+            var editorfile1 = $("#meta-image1");
+            var editorfileval = editorfile1.val();
+            var dependableselectval = $("#audio_preset option:selected").val();
+
+            if (editorfileval == "" && dependableselectval != "0") {
+                isAudioFileValid1 = false;
+                editorfile1.addClass("error");
+            } else {
+                editorfile1.removeClass("error");
+            }
+        }
+
+        /**
+         * Newsletter description validation
+         * @return {[type]} [description]
+         */
+        editorfileValid1();
+
+        function editorfileValid1() {
+            isAudioFileValid1 = true;
+            var editorfile1 = $("#meta-image1");
+            var editorfileval = editorfile1.val();
+            var dependableselectval = $("#audio_preset option:selected").val();
+
+            if (editorfileval == "" && dependableselectval == "p1") {
+                isAudioFileValid1 = false;
+                editorfile1.addClass("error");
+            } else {
+                editorfile1.removeClass("error");
+            }
+        }
+
+        /**
+         * Newsletter description validation
+         * @return {[type]} [description]
+         */
+        editorfileValid2();
+
+        function editorfileValid2() {
+            isAudioFileValid2 = true;
+            var editorfile1 = $("#meta-image2");
+            var editorfileval = editorfile1.val();
+            var dependableselectval = $("#audio_preset option:selected").val();
+
+            if (editorfileval == "" && dependableselectval == "p2") {
+                isAudioFileValid2 = false;
+                editorfile1.addClass("error");
+            } else {
+                editorfile1.removeClass("error");
+            }
+        }
+
+
+        /**
+         * Newsletter description validation
+         * @return {[type]} [description]
+         */
+        editorfileValid3();
+
+        function editorfileValid3() {
+            isAudioFileValid3 = true;
+            var editorfile1 = $("#meta-image3");
+            var editorfileval = editorfile1.val();
+            var dependableselectval = $("#audio_preset option:selected").val();
+
+            if (editorfileval == "" && dependableselectval == "p3") {
+                isAudioFileValid3 = false;
+                editorfile1.addClass("error");
+            } else {
+                editorfile1.removeClass("error");
+            }
+        }
+
 
         /**
          * Newsletter description validation
@@ -149,7 +234,9 @@
             isAudioFileValid = true;
             var editorfile = $("#meta-image");
             var editorfileval = editorfile.val();
-            if (editorfileval == "") {
+            var dependableselectval = $("#audio_proorunpro option:selected").val();
+
+            if (editorfileval == "" && dependableselectval == "unprocessed") {
                 isAudioFileValid = false;
                 editorfile.addClass("error");
             } else {
@@ -159,7 +246,8 @@
 
 
         var form = $(this);
-        if (isAudioDescriptionValid == true && isAudioNameValid == true && isAudioFileValid == true && isAudioSelectValid == true && isAudioSelect2Valid == true && isAudioSelect3Valid == true) {
+
+        if (isAudioDescriptionValid == true && isAudioNameValid == true && isAudioSelectValid == true && isAudioSelect3Valid == true && isAudioSelect2Valid == true) {
 
             /**
              * Data passing to the server with ajax
